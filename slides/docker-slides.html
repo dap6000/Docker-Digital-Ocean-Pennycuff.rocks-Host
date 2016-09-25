@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Intro to Docker</title>
+	<link rel="stylesheet" href="default.min.css">
+	<style type="text/css">
+		h1 { text-align: center; }
+		h2 { text-align: center; }
+		h3 { text-align: center; }
+	</style>
+	<script src="highlight.min.js"></script>
+	<script src="jquery-1.8.2.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script>
+		var slideshow = function() {
+			var $divs = $('body > div');
+			$divs.hide();
+			var $currentPage = $divs.first();
+			$currentPage.show();
+
+			var slideMode = true;
+
+			var nextSlide = function () {
+				if($currentPage.next().length == 0) { return; }
+				$currentPage.hide();
+				$currentPage = $currentPage.next();
+				$currentPage.show();
+			};
+
+			var prevSlide = function () {
+				if($currentPage.prev().length == 0) { return; }
+				$currentPage.hide();
+				$currentPage = $currentPage.prev();
+				$currentPage.show();
+			}
+
+			var x = 0;
+			var y = 0;
+			var dx = 0;
+			var dy = 0;
+			var started = false;
+			var touchStart = function(evt) {
+				started = true;
+				x = evt.touches[0].clientX;
+				y = evt.touches[0].clientY;
+			};
+
+			var touchMove = function(evt) {
+				if(!started) { return; }
+				var nx = evt.touches[0].clientX;
+				var ny  = evt.touches[0].clientY;
+				dx = x - nx;
+				dy = y - ny;
+			};
+
+			var touchEnd = function(evt) {
+				started = false;
+				if (Math.abs(dx) > (1.8 * Math.abs(dy))) {
+					if(dx > 0) {
+						nextSlide();
+					} else {
+						prevSlide();
+					}
+				}
+			}
+
+			document.addEventListener('touchstart', touchStart, false);        
+			document.addEventListener('touchmove', touchMove, false);
+			document.addEventListener('touchend', touchEnd, false);
+
+			$('body').keydown(function (evt) {
+				if(evt.keyCode == 27) {
+					if(slideMode) {
+						slideMode = false;
+						$divs.show();
+					} else {
+						slideMode = true;
+						$divs.hide();
+						$currentPage = $divs.first();
+						$currentPage.show();
+					}
+				} else if(slideMode && (evt.keyCode == 37)) {
+					// left
+					prevSlide();
+				} else if(slideMode && (evt.keyCode == 39)) {
+					// right
+					nextSlide();
+				}
+			});
+		};
+		$(document).ready(function () {
+			slideshow();
+		});
+</script>
+</head>
+<body>
+
+<div class="side">
+	<h1>An Introduction to Docker</h1>
+	<h2>Emily Estes</h2>
+	<h3>2016-08-?? @ DevOps Knoxville Meetup</h3>
+	<p>To navigate: left arrow - previous slide, right arrow - next slide, escape - toggle slide show mode.</p>
+</div>
+
+
+<div class="side">
+<h1>Goals of this presentation</h1>
+<ul>
+	<li>Explain what a container is</li>
+	<li>Give an overview of the Docker ecosystem</li>
+	<li>Demonstrate how to create a basic Docker container</li>
+	<li>Explain some patterns that work for me in building, testing, and deploying applications with Docker</li>
+	<li>Point out some non-devops usages of containers</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>What is a container?</h1>
+<ul>
+	<li>A way of making local variables seem like globals. - Emily Estes</li>
+	<li>Static linking for servers. Emily Estes</li>
+</ul>
+
+<h2>No... seriously what is a container?</h2>
+<p>A container "virtualizes" many aspects of a operating system to manage a group of processes giving them their own view of system resources, including memory, processes, I/O, networking, users, and the file system. On Linux in particular, it virtualizes the kernel, giving the appearance of having a whole operating system while sharing the computer with other groups of processes sharing the same kernel. If this sounds a lot like a virtual machine, you're not wrong. Virtual Machines like Xen, VMWare, and the JVM and others virtualize systems at the hardware layer. So philosophically, Docker is mostly nothing new. Docker is popularizing ideas from previous systems and was originally built as a way to conveniently use the LXC (Linux Containerization) package which is built on the cgroup API's that exist in the Linux kernel.</p>
+</div>
+
+<div class="slide">
+<h1>A brief history of containers</h1>
+<ul>
+	<li>1979 - chroot was added to Unix Version 7 to "change the root" of the file system for a process and it's children.</li>
+	<li>2000 - FreeBSD adds jail system call and associated utilities to virtualize processes as well as changing the root of the file system.</li>
+	<li>2005 - Solaris Zones are added to Solaris 10 providing virtualization of the kernel to create virtual servers.</li>
+	<li>2005 - OpenVZ creates an extended Linux kernel supporting virtualization similiar to Solaris Zones</li>
+	<li>2007 - Linux adds cgroups to kernel, allowing groups of processes to be managed as a single unit and allowing their view of the system to be isolated from other processes.</li>
+	<li>2008 - LXC is released making use of the cgroup syscalls added to Linux to create containers.</li>
+	<li>2010 - illumos is released as a fork of OpenSolaris, and continues to encourage people to use Solaris Zones to virtualize servers.</li>
+	<li>2013 - Docker is released which initially is a set of wrappers to simplify using LXC.</li>
+	<li>2015 - The internet loses it mind about this brand new technology called containerization. /s</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>What is Docker</h1>
+<p>Docker is a client/server program to create and manage containers running on a Linux server. The docker daemon is a server that has a list of tagged and versioned images(templates if you will) which are used to create image instances, i.e. containers. The docker client scripts the creation of images with a simple scripting language. In addition to the script(called the Dockerfile), you can include a collection of files that can be referenced in the script(This collection is called the "Build context"). The image created by docker is just a collection of files... if you use the docker client to export an image, you'll get a .tar file containing the filesystem used inside the container.</p>
+</div>
+
+<div class="slide">
+<h1>What is this PID 1 stuff?</h1>
+<p>The root process in your container will be running as PID(process ID) 1. On *nix, PID 1 has some special responsibilities, namely reaping zombie child processes that the kernel reassigns to it. Also, it has to keep running, if it crashes or stops, your container stops.</p>
+
+<h2>A brief and wrong introduction to init systems and process supervisors.</h2>
+<p><strike>A container can do whatever it wants to do.</strike> Containers should ideally do "one thing"(some people are hyperliteralist who take this to mean a container should have one process... some people are wrong), but that "one thing" probably has some subprocesses to run in order to make it happen. For example, you might have a database running in a container, and part of "running a database" is backing it up, so you might want to run a job to do a dump of the database, and another job to copy those dumps to another computer somewhere else on the internet.</p>
+
+<p>The "init system" on *nix runs as PID 1, it also often starts up services, like your database, webserver, and cron (for instance). Systemd is a (contentious) popular init system that has recently come to prominence on many distros. Upstartd is another one. The classic SysV init system just ran a bunch of shell scripts to start up services. Launchd is the init system on Mac OS X. Dan Bernstein also came up with a set of tools called "daemontools" which decomposed the idea of process management into several utilities instead of one big program, because that's the "Unix way", and of course, this spawned the creation of many clones and systems inspired by daemontools. There are also other process managers like supervisord. All of these are options to run as PID 1 in a container.</p>
+
+<h3>Supervisord</h3>
+<p>I happen to like supervisord and I probably use it in about 80% of the containers I end up writing.</p>
+</div>
+
+
+http://prakhar.me/docker-curriculum/
+	https://www.reddit.com/r/programming/comments/4plc5r/a_complete_introduction_to_docker_for_beginners/?limit=500
+https://ariya.io/2016/05/nix-as-os-x-package-manager
+	https://news.ycombinator.com/item?id=11772686
+http://lethalman.blogspot.com/2016/04/cheap-docker-images-with-nix_15.html
+	https://news.ycombinator.com/item?id=11502989
+
+<div class="slide">
+
+	<h1>References and Resources</h1>
+	<h2>Registries</h2>
+	<ul>
+		<li><a href="https://docs.docker.com/registry/">Docker registry</a></li>
+		<li><a href="https://github.com/docker/distribution">Docker Distribution</a>(supercedes Docker registry)</li>
+		<li><a href="https://www.jfrog.com/artifactory/">Artifactory</a>(can be used as a docker registry and nearly every other kind of artifact repository)</li>
+		<li><a href="https://about.gitlab.com/2016/05/23/gitlab-container-registry/">Gitlab Container Registry</a></li>
+		<li><a href="https://hub.docker.com/">Docker hub</a> - The home of official images and public images. Can pay for private repos.</li>
+	</ul>
+
+	<h2>Going beyond Docker</h2>
+	<ul>
+		<li><a href="http://kubernetes.io/">Kubernetes</a></li>
+		<li><a href="http://mesos.apache.org/">Apache Mesos</a></li>
+		<li><a href="https://docs.docker.com/swarm/">Docker Swarm</a></li>
+		<li><a href="https://shipyard-project.com/">Shipyard</a></li>
+		<li><a href="https://aws.amazon.com/ecs/">Amazon ECS</a> - ECS = "EC2 Container Service"</li>
+		<li><a href="https://www.terraform.io/">Terraform</a></li>
+	</ul>
+
+	<h2>Miscellaneous Docker</h2>
+	<ul>
+		<li><a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop/">Docker Containers on the Desktop</a></li>
+	</ul>
+
+	<h2>Miscellaneous</h2>
+	<ul>
+		<li><a href="https://help.ubuntu.com/community/Apt-Cacher-Server">Apt-cacher-server</a></li>
+		<li><a href="http://www.tecmint.com/apt-cache-server-in-ubuntu/">Setting up Apt-Cacher-NG</a></li>
+		<li><a href="https://docs.docker.com/engine/examples/apt-cacher-ng/">Dockering Apt-Cacher-NG</a></li>
+		<li><a href="https://www.aptly.info/">Aptly</a></li>
+		<li><a href="https://apt-mirror.github.io/">Apt-mirror</a></li>
+		<li><a href="http://www.sonatype.com/download-oss-sonatype">Sonatype Nexus</a></li>
+	</ul>
+
+	<h2>Process management and init</h2>
+	<ul>
+		<li><a href="https://felipec.wordpress.com/2013/11/04/init/">Demystifying init</a></li>
+		<li><a href="http://homepage.ntlworld.com/jonathan.deboynepollard/FGA/daemontools-family.html">The daemontools family</a></li>
+		<li><a href="http://core.suckless.org/sinit">Suckless init</a></li>
+		<li><a href="https://www.freedesktop.org/wiki/Software/systemd/">Systemd</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Launchd">Launchd</a></li>
+		<li><a href="http://upstart.ubuntu.com/">upstartd</a></li>
+		<li><a href="http://supervisord.org/">Supervisord</a></li>
+	</ul>
+</div>
+</html>
