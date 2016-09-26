@@ -190,7 +190,7 @@ mkdir -p /opt/example # The location we're going to install our app to.
 cp /my-app/* /opt/example
 chown www-data -R /opt/example/
 chgrp www-data -R /opt/example/
-/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf # start supervisord so it can start our servers.
+supervisord -c /etc/supervisor/conf.d/supervisord.conf # start supervisord so it can start our servers.
 </code></pre>
 
 <p>Obviously, we need to have some config files stashed somewhere along with our example app. But this is roughly what you would do for a simple app. More complex apps would involve a similar process with more steps, but would follow the same basic ideas.</p>
@@ -212,8 +212,8 @@ chgrp www-data -R /opt/example/
 
 <div class="slide">
 <h1>An example Dockerfile</h1>
-<p>Docker images are created using a script in a file named <em>Dockerfile</em>. The rest of the files (And folders) within the same folder the Dockerfile lives in are called the "Build context" and they are available for use within the Dockerfile. We can take the list of instructions for building a web server from the previous slide and turn them into a Dockerfile like so:</p>
-<pre><code class="bash"># nginx/php Docker example.
+<p>Docker images are created using a script in a file named <em>Dockerfile</em>. The rest of the files (And folders) within the same folder the Dockerfile lives in are called the "Build context" and they are available for use within the Dockerfile. We can take the list of instructions for building a web server from the previous slide and turn them into a Dockerfile like so:
+<pre><code class="dockerfile"># nginx/php Docker example.
 FROM debian:jessie
 
 RUN apt-get update &amp;&amp; \
@@ -231,18 +231,15 @@ RUN chown www-data -R /opt/example/ &amp;&amp; \
 EXPOSE 8080
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]</code></pre>
-<p>In addition to the Dockerfile itself, there are some config files for various services in the same folder. My personal convention is to put them in the place they will go on the "final" install and just copy them over wholesale. (The config files I am using here are in the same git repo as the slides for this presentation.)
-<h2>Building and running...</h2>
+In addition to the Dockerfile itself, there are some config files for various services in the same folder. My personal convention is to put them in the place they will go on the "final" install and just copy them over wholesale. (The config files I am using here are in the same git repo as the slides for this presentation.)</p>
+
+<h3>Building and running...</h3>
 <p>To build the image from this Dockerfile we run the following command:
 <pre><code class="bash">docker build -t example .</code></pre>
 This will take a few minutes (because of apt). Once it's done, you can run the image like so:
 <pre><code class="bash">docker run -d --name="example-container" -p 8080:8080 example</code></pre>
 Now you can browse to <a href="http://localhost:8080/index.php">http://localhost:8080/index.php</a> and see the web app running. In addition to this, if we want to inspect things going on inside the container, we can get a shell via the following command:
 <pre><code class="bash">docker exec -it example-container bash</code></pre>
-To get a list of running containers:
-<pre><code class="bash">docker ps</code></pre>
-To get a list of images:
-<pre><code class="bash">docker images</code></pre>
 </p>
 </div>
 
@@ -258,7 +255,62 @@ To get a list of images:
 <p>The "init system" on *nix runs as PID 1, it also often starts up services, like your database, webserver, and cron (for instance). Systemd is a (contentious) popular init system that has recently come to prominence on many distros. Upstartd is another one. The classic SysV init system just ran a bunch of shell scripts to start up services. Launchd is the init system on Mac OS X. Dan Bernstein also came up with a set of tools called "daemontools" which decomposed the idea of process management into several utilities instead of one big program, because that's the "Unix way", and of course, this spawned the creation of many clones and systems inspired by daemontools. There are also other process managers like supervisord. All of these are options to run as PID 1 in a container.</p>
 
 <h3>Supervisord</h3>
-<p>I happen to like supervisord and I probably use it in about 80% of the containers I end up writing.</p>
+<p>I happen to like supervisord and I probably using it in the majority of the containers I end up writing. By way of example, here is the config file used in the previous example image:</p>
+<pre><code class="ini">[supervisord]
+nodaemon=true
+childlogdir=/var/opt/example/
+
+[program:nginx]
+command=/usr/sbin/nginx
+stdout_events_enabled=true
+stderr_events_enabled=true
+
+[program:php]
+command = /usr/sbin/php5-fpm
+autostart=true</code></pre>
+</div>
+
+
+
+<div class="slide">
+<h1>Plumbing</h1>
+<h2>Volumes</h2>
+<p>Containers are like a running executable. They have state while they are running, but when they are killed all changes to the file system inside the container are erased. Starting a second (or 300th) instance of an image will be completely indepedent of any other instances. This is what is meant when people state that containers are "stateless".</p>
+
+<p>Docker provides a concept called a "Volume" to save state between instances. A volume is simply a folder whose contents are preserved between instance starts (they are associated with a container instance not the image). A volume can be mapped to a folder on the host system or a location inside another container. Volumes can be declared in a Dockerfile with the <strong>VOLUME</strong> directive or on the command line when creating an instance via the <em>-v</em> switch:
+<pre><code class="bash">docker run -d --name="example-container" -p 8080:8080 -v ~/example/data:/var/opt/example:rw example</code></pre></p>
+
+<h2>Ports</h2>
+<p>In addition to file system state, containers often need to expose ports, the <strong>EXPOSE</strong> directive is for a list of ports the container will be listening on inside the container. These are the ports inside the container though, to connect a port to the outside world you still have use the <em>-p</em> switch when creating the container. The <em>--expose</em> switch can expose additional ports to the ones declared in the Dockerfile.
+
+<h2>Environment Variables</h2>
+<p>The <strong>ENV</strong> directive can be used to set environment variables in the container, however, environment variables are also one of the preferred ways of passing runtime configuration into the container via the <em>-e</em> command line switch, which sets the value of environment variables inside the container. (This is especially useful if you're building a <a href="https://12factor.net/">12-factor app</a>.)
+</div>
+
+
+
+<div class="slide">
+<h1>Multiple containers</h1>
+</div>
+
+
+
+<div class="slide">
+<h1>Deploying to a virtual machine</h1>
+</div>
+
+
+
+<div class="slide">
+<h1>Some other usages of containers</h1>
+<h2>Desktop applications</h2>
+<p>One virtue of a container is that they isolate everything IN the container and keep it from polluting the rest of your system. This can be used to run desktop applications inside containers. Exporting a volume to a folder in your home directory can be done so that you can save files from applications "like normal". The <em>-it</em> command line switch with the <code>docker run</code> command can be used for shell applications. However, since X-Windows uses sockets to communicate between the client and server, you can also run GUI apps inside a container as well. Jessie Frazelle's post: <a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop/">Docker Containers on the Desktop</a> is a good starting point.</p>
+
+<h2>"Toxic Waste" Containers</h2>
+<p>If you don't have to support legacy apps that only work on outdated dependencies then congratulations. For the rest of us, containers also provide a way to manage the risks involved by building an image around the legacy code and outdated dependencies and using that image to isolate the application from the rest of your system.</p>
+
+<h2>Mocking Services</h2>
+<p>Once you have an application running in a container, external services like SMTP, databases, etc. will be needed in production to deploy the application. However, in a testing environment, you can create "mock" versions of these services in containers as well to isolate the application entirely from the outside world. For instance, I have images I use that provide a SMTP "sink" that accepts all emails sent, and another image built around running an <a href="http://s3ninja.net/">AWS S3</a> implementation as a mock as well. (I have included the smtp sink in the git repo with these slides.)</p>
 </div>
 
 
@@ -303,6 +355,7 @@ To get a list of images:
 		<li><a href="https://www.aptly.info/">Aptly</a></li>
 		<li><a href="https://apt-mirror.github.io/">Apt-mirror</a></li>
 		<li><a href="http://www.sonatype.com/download-oss-sonatype">Sonatype Nexus</a></li>
+		<li><a href="https://12factor.net/">12 Factor Apps</a></li>
 	</ul>
 
 	<h2>Process management and init</h2>

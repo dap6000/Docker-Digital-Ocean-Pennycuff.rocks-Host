@@ -1,0 +1,42 @@
+# This is the domain name for the mail server. However, we're functioning as a sink, so we'll accept mail for ALL
+# domains so the value of this variable doesn't really matter.
+mydomain=mail.test
+myorigin = $mydomain
+# Set the destinations we accept mail for to a regex table in /etc/postfix/destinations.
+mydestination = regexp:/etc/postfix/destinations
+# Set the networks we trust, in addition to the local/loopback interfaces, the 172.0.0.0/24 is the default IP block for
+# docker containers, so trust every docker container as well.
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.0.0.0/24
+# The default transport is named "fs_mail" which is defined in master.cf.
+default_transport = fs_mail
+# The local transport is the same. I'm not sure I need both of these lines though.
+local_transport = fs_mail
+# Our local recipients are defined by another regex table, this time in /etc/postfix/virtual_mailboxes.
+# This makes sure that postfix see's any address as local deliverable.
+local_recipient_maps = regexp:/etc/postfix/virtual_mailboxes
+virtual_mailbox_maps = regexp:/etc/postfix/virtual_mailboxes
+# We're going to accept every domain and every email, so don't even try to look up MX records or attempt to relay
+# mail.
+disable_dns_lookups = yes
+# There is no limit on mailbox size.
+mailbox_size_limit = 0
+# Have smtpd listen on ALL network interfaces.
+inet_interfaces = all
+
+# The greeting for the server over SMTP.
+smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+# These certs are installed by default with debian. You can use them if you want, but since I wanted to inject other
+#   self-signed certs and inject them in mail client truststore, I defined a different location and mount it with
+#   volumes_from
+#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+# You can install openssl and use a command like so to generate the key and the self-signed certificate:
+#     openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout /etc/postfix/ssl/mail.key -out /etc/postfix/ssl/mail.crt
+#   The /etc/postfix/ssl/mail.crt file is needed to inject in a trust store.
+smtpd_tls_cert_file=/etc/postfix/ssl/mail.crt
+smtpd_tls_key_file=/etc/postfix/ssl/mail.key
+# Definitely enable TLS support.
+smtpd_use_tls=yes
+# Default caching folders
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
