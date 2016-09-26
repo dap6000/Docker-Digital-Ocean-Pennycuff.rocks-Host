@@ -281,7 +281,7 @@ autostart=true</code></pre>
 <pre><code class="bash">docker run -d --name="example-container" -p 8080:8080 -v ~/example/data:/var/opt/example:rw example</code></pre></p>
 
 <h2>Ports</h2>
-<p>In addition to file system state, containers often need to expose ports, the <strong>EXPOSE</strong> directive is for a list of ports the container will be listening on inside the container. These are the ports inside the container though, to connect a port to the outside world you still have use the <em>-p</em> switch when creating the container. The <em>--expose</em> switch can expose additional ports to the ones declared in the Dockerfile.
+<p>In addition to file system state, containers often need to expose ports, the <strong>EXPOSE</strong> directive is for a list of ports the container will be listening on inside the container. These are the ports inside the container though, to connect a port to the outside world you still have use the <em>-p</em> switch when creating the container. The <em>--expose</em> switch can expose additional ports to the ones declared in the Dockerfile. The <em>--link</em> command line switch will attach the container to another container on the same network so you can privately communicate between them.</p>
 
 <h2>Environment Variables</h2>
 <p>The <strong>ENV</strong> directive can be used to set environment variables in the container, however, environment variables are also one of the preferred ways of passing runtime configuration into the container via the <em>-e</em> command line switch, which sets the value of environment variables inside the container. (This is especially useful if you're building a <a href="https://12factor.net/">12-factor app</a>.)
@@ -291,12 +291,72 @@ autostart=true</code></pre>
 
 <div class="slide">
 <h1>Multiple containers</h1>
+<p>Wiring up multiple containers using volumes and links via <code>docker run</code> on the command line gets tedious. Nothing that you can't automate with a good shell script though. You can also use the <a href="https://docs.docker.com/compose/overview/">Docker compose</a> tool to as a more declarative way to describe the relationships between your containers for an application. The command line tool <code>docker-compose</code> looks for a YAML file in the current folder named <em>docker-compose.yml</em>.</p>
+
+<pre><code class="yaml">web:
+  image: example_web
+  ports:
+    - "80:80"
+    - "443:443"
+  links:
+    - database
+  env_file: env.sh
+
+database:
+  image: example_dbms
+  env_file: env.sh</code></pre>
+<p>This is an example of a docker compose file for a database backed web application where the database is containerized as well. The <em>env.sh</em> file is just a list of environment variables for configuring the web server and database server. To start the application we can simply do:
+<pre><code class="bash">docker-compose up</code></pre>
+And docker compose will load the environment variables and start the containers in the proper order.</p>
+
+<p>Docker compose is just one way to do this, and there is really nothing it is doing that you can't also do from the command line with <code>docker</code> directly. Also, it is common to have multiple <em>docker-compose.yml</em> files for a project. For instance, I have ones that configure test environments using containers to emulate backing services like SMTP, and then a separate file for describing a more typical production deployment.</p>
 </div>
 
 
 
 <div class="slide">
 <h1>Deploying to a virtual machine</h1>
+<p>So far we've done all of this on our local linux machine. If you are running Docker on OS X or Windows, you will have already encountered <a href="https://docs.docker.com/machine/overview/">Docker machine</a>. Docker machine is a command line tool that can be used to create and control virtual machines and running docker containers. It has drivers cloud services like Digital Ocean and AWS in addition to local VM's like VirtualBox.</p>
+
+<p>To create an virtual machine on Digital Ocean, for instance, you would run the following command:
+<pre><code class="bash">docker-machinhttps://hub.docker.com/e create --driver digitalocean --digitalocean-access-token $VPSTOKEN --digitalocean-size 512mb --digitalocean-image ubuntu-16-04-x64 example-vps</code></pre>
+You would set the <code>VPSTOKEN</code> environment variable to the API key provided by Digital Ocean. (Yes, running this will cost you money.)</p>
+
+<p>Once the virtual machine is running, to point the local docker client at the docker server listening on the VM, you would run the following command to change the environment variables:
+<pre><code class="bash">eval "$(docker-machine env example-vps)"</code></pre></p>
+
+<p>Now all the <code>docker</code> commands you issue will run against the virtual machine you have created.<p>
+
+<h2>Getting images on the virtual machine</h2>
+<p>There are several ways to get an image on to a virtual machine. The first is to simply set the docker client pointed to the virtual machine and run a <code>docker build</code> command. Other ways include pulling an image from a docker repository like <a href="https://hub.docker.com/">Docker hub</a>. The third way is to use the <code>docker export</code> and <code>docker import</code> commands to extract the image to a tarball (via export) and restore it on the VM's docker daemon (via import).</p>
+</div>
+
+
+
+<div class="slide">
+<h1>Repeatability</h1>
+<p>Dockerfile's allow you to run commands like <code>curl</code> and <code>apt-get</code> while building a container. These commands fetch things from the internet, and as such, you run a risk of creating non-repeatable builds. While apt-get might be better than downloading an arbitrary URL, new versions of packages are released, so without doing any sort of version pinning, you still run risks. In general, Dockerfile's and the build context for an image should be managed in your version control system.</p>
+
+<h1>Registries</h1>
+<p>Docker relies on a registry for it's push and pull commands for managing images. However, they have released the code they use to run their registry as open source and you can run a private docker registry for your images and avoid using the main docker hub. In addition, they have already containerized their own registry, so you can deploy it as a containerized application. See <a href="https://github.com/docker/distribution">Docker Distribution</a> for more information.</p>
+
+<p>In addition to docker, it is common to rely on things like apt-get, maven repositories, npm, etc. for building your applications. Registries and artifact repositories exist for these as well, so you can run your own artifact repositories for increased repeatability. <a href="https://www.jfrog.com/artifactory/">Artifactory</a> probably supports most formats you would ever want to use, but you can also run more specialized repositories like <a href="http://www.tecmint.com/apt-cache-server-in-ubuntu/">Apt-cacher-ng</a> for caching apt-get repositories.</p>
+</div>
+
+
+
+<div class="slide">
+<h1>The wider ecosystem</h1>
+<p>In addition to docker, docker-compose, and docker-machine there are other linux based containerization tools and cluster management tools for building and deploying containerized applications. One of the downsides of Docker, and Linux containers in general, is that the some parts of the ecosystem are in flux and there are tensions around standards for things like container formats. On the other hand, once you understand Docker, moving to one of the other options should not be difficult (migrating a large investment in one of the options might be more difficult though).</p>
+
+<h2>CoreOS and rkt</h2>
+<p>CoreOS is a Linux distro organized around running everything in containers. It uses a tool called <a href="https://coreos.com/rkt/">rkt</a>(pronounced "rocket") instead of Docker. However, <code>rkt</code> can work with Docker's image format, so you can run docker images in addition to <code>rkt</code> generated images. <code>rkt</code> has some compelling features like allowing you to use https to download images rather than relying on a "hub" like Docker does, and it is also based on a daemon running as root, and instead run's the images directly.</p>
+
+<h2>Kubernetes</h2>
+<p><a href="http://kubernetes.io/">Kubernetes</a> is a "cluster management tool" for running containerized applications on a collection of servers(either virtual or physical). It is based on internal technology from Google. Applications are described as collections of containers and assigned to servers. Kubernetes can work with both <code>rkt</code> and <code>Docker</code> images.</p>
+
+<h2>Mesos</h2>
+<p><a href="http://mesos.apache.org/">Apache Mesos</a> can be used to run containerized applications on a cluster of servers, similar to Kubernetes. The two use different architectures and have different styles, but are essentially in competition.</p>
 </div>
 
 
