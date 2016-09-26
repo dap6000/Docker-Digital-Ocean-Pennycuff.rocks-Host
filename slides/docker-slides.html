@@ -98,9 +98,10 @@
 <div class="side">
 	<h1>An Introduction to Docker</h1>
 	<h2>Emily Estes</h2>
-	<h3>2016-08-?? @ DevOps Knoxville Meetup</h3>
+	<h3>2016-09-26 @ DevOps Knoxville Meetup</h3>
 	<p>To navigate: left arrow - previous slide, right arrow - next slide, escape - toggle slide show mode.</p>
 </div>
+
 
 
 <div class="side">
@@ -114,16 +115,30 @@
 </ul>
 </div>
 
-<div class="slide">
-<h1>What is a container?</h1>
-<ul>
-	<li>A way of making local variables seem like globals. - Emily Estes</li>
-	<li>Static linking for servers. Emily Estes</li>
-</ul>
 
-<h2>No... seriously what is a container?</h2>
-<p>A container "virtualizes" many aspects of a operating system to manage a group of processes giving them their own view of system resources, including memory, processes, I/O, networking, users, and the file system. On Linux in particular, it virtualizes the kernel, giving the appearance of having a whole operating system while sharing the computer with other groups of processes sharing the same kernel. If this sounds a lot like a virtual machine, you're not wrong. Virtual Machines like Xen, VMWare, and the JVM and others virtualize systems at the hardware layer. So philosophically, Docker is mostly nothing new. Docker is popularizing ideas from previous systems and was originally built as a way to conveniently use the LXC (Linux Containerization) package which is built on the cgroup API's that exist in the Linux kernel.</p>
+
+<div class="slide">
+	<h1>What is a container?</h1>
+	<ul>
+		<li>A way of making local variables seem like globals. - Emily Estes</li>
+		<li>Static linking for servers. - Emily Estes</li>
+	</ul>
 </div>
+
+
+
+<div class="slide">
+	<h1>What is a container?</h1>
+	<ul>
+		<li>A way of making local variables seem like globals. - Emily Estes</li>
+		<li>Static linking for servers. - Emily Estes</li>
+	</ul>
+
+	<h2>No... seriously what is a container?</h2>
+	<p>A container "virtualizes" many aspects of a operating system to manage a group of processes giving them their own view of system resources, including memory, processes, I/O, networking, users, and the file system. On Linux in particular, it virtualizes the kernel, giving the appearance of having a whole operating system while sharing the computer with other groups of processes sharing the same kernel. If this sounds a lot like a virtual machine, you're not wrong. Virtual Machines like Xen, VMWare, and the JVM and others virtualize systems at the hardware layer. So philosophically, Docker is mostly nothing new. Docker is popularizing ideas from previous systems and was originally built as a way to conveniently use the LXC (Linux Containerization) package which is built on the cgroup API's that exist in the Linux kernel.</p>
+</div>
+
+
 
 <div class="slide">
 <h1>A brief history of containers</h1>
@@ -140,13 +155,101 @@
 </ul>
 </div>
 
+
+
 <div class="slide">
 <h1>What is Docker</h1>
 <p>Docker is a client/server program to create and manage containers running on a Linux server. The docker daemon is a server that has a list of tagged and versioned images(templates if you will) which are used to create image instances, i.e. containers. The docker client scripts the creation of images with a simple scripting language. In addition to the script(called the Dockerfile), you can include a collection of files that can be referenced in the script(This collection is called the "Build context"). The image created by docker is just a collection of files... if you use the docker client to export an image, you'll get a .tar file containing the filesystem used inside the container.</p>
 </div>
 
+
+
 <div class="slide">
-<h1>What is this PID 1 stuff?</h1>
+<h1>Now forget all of that.</h1>
+</div>
+
+
+
+<div class="slide">
+<h1>Now forget all of that.</h1>
+<h2>Let's set up a basic web server with nginx and php.<h2>
+</div>
+
+
+
+<div class="slide">
+<h1>Now forget all of that.</h1>
+<h2>Let's set up a basic web server with nginx and php.</h2>
+<p>If you were just going to set up a vanilla install of Debian (for example), once you were at a shell, a manual install would go something like the following sequence of commands:</p>
+<pre><code class="bash">apt-get update
+apt-get install -y nginx supervisor php5 php5-fpm php5-common
+cp /my-nginx.conf /etc/nginx/nginx.conf # let's just assume we have a standard configuration of nginx copied from somewhere
+cp /my-php-fpm.conf /etc/php5/fpm/php-fpm.conf # Again, we have a set of tweaked config files we want to use for PHP as well.
+cp /my-supervisord.conf /etc/supervisord/conf.d/supervisord.conf # Also we want to use supervisord to manage this server.
+mkdir -p /opt/example # The location we're going to install our app to.
+cp /my-app/* /opt/example
+chown www-data -R /opt/example/
+chgrp www-data -R /opt/example/
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf # start supervisord so it can start our servers.
+</code></pre>
+
+<p>Obviously, we need to have some config files stashed somewhere along with our example app. But this is roughly what you would do for a simple app. More complex apps would involve a similar process with more steps, but would follow the same basic ideas.</p>
+</div>
+
+
+<div class="slide">
+<h1>So what's wrong with setting up a server this way?</h1>
+<ul>
+	<li>It's a manual process, so we could forget some steps.</li>
+	<li>If there is a mistake in that list of commands, most of us would investigate the issue and run a tweaked command to get it to work... but we might forget to write down the correction.</li>
+	<li>This is not (easily) repeatable.</li>
+	<li>This is not automatable (as is).</li>
+</ul>
+<h2>Do you want a snowflake server? Because that's how you get a snowflake server.</h2>
+</div>
+
+
+
+<div class="slide">
+<h1>An example Dockerfile</h1>
+<p>Docker images are created using a script in a file named <em>Dockerfile</em>. The rest of the files (And folders) within the same folder the Dockerfile lives in are called the "Build context" and they are available for use within the Dockerfile. We can take the list of instructions for building a web server from the previous slide and turn them into a Dockerfile like so:</p>
+<pre><code class="bash"># nginx/php Docker example.
+FROM debian:jessie
+
+RUN apt-get update &amp;&amp; \
+    apt-get install -y nginx supervisor php5 php5-fpm php5-common
+
+COPY ["/etc", "/etc/"]
+COPY ["/opt", "/opt/"]
+COPY ["/var", "/var/"]
+
+RUN chown www-data -R /opt/example/ &amp;&amp; \
+    chgrp www-data -R /opt/example/ &amp;&amp; \
+    chmod a+rw /var/opt/example/ &amp;&amp; \
+    chmod a+w /var/log/
+
+EXPOSE 8080
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]</code></pre>
+<p>In addition to the Dockerfile itself, there are some config files for various services in the same folder. My personal convention is to put them in the place they will go on the "final" install and just copy them over wholesale. (The config files I am using here are in the same git repo as the slides for this presentation.)
+<h2>Building and running...</h2>
+<p>To build the image from this Dockerfile we run the following command:
+<pre><code class="bash">docker build -t example .</code></pre>
+This will take a few minutes (because of apt). Once it's done, you can run the image like so:
+<pre><code class="bash">docker run -d --name="example-container" -p 8080:8080 example</code></pre>
+Now you can browse to <a href="http://localhost:8080/index.php">http://localhost:8080/index.php</a> and see the web app running. In addition to this, if we want to inspect things going on inside the container, we can get a shell via the following command:
+<pre><code class="bash">docker exec -it example-container bash</code></pre>
+To get a list of running containers:
+<pre><code class="bash">docker ps</code></pre>
+To get a list of images:
+<pre><code class="bash">docker images</code></pre>
+</p>
+</div>
+
+
+
+<div class="slide">
+<h1>A digression about PID 1</h1>
 <p>The root process in your container will be running as PID(process ID) 1. On *nix, PID 1 has some special responsibilities, namely reaping zombie child processes that the kernel reassigns to it. Also, it has to keep running, if it crashes or stops, your container stops.</p>
 
 <h2>A brief and wrong introduction to init systems and process supervisors.</h2>
@@ -159,16 +262,14 @@
 </div>
 
 
-http://prakhar.me/docker-curriculum/
-	https://www.reddit.com/r/programming/comments/4plc5r/a_complete_introduction_to_docker_for_beginners/?limit=500
-https://ariya.io/2016/05/nix-as-os-x-package-manager
-	https://news.ycombinator.com/item?id=11772686
-http://lethalman.blogspot.com/2016/04/cheap-docker-images-with-nix_15.html
-	https://news.ycombinator.com/item?id=11502989
 
 <div class="slide">
-
 	<h1>References and Resources</h1>
+	<h2>Docker</h2>
+	<ul>
+		<li><a href="http://prakhar.me/docker-curriculum/">Docker for Beginners</a></li>
+	</ul>
+
 	<h2>Registries</h2>
 	<ul>
 		<li><a href="https://docs.docker.com/registry/">Docker registry</a></li>
@@ -181,6 +282,7 @@ http://lethalman.blogspot.com/2016/04/cheap-docker-images-with-nix_15.html
 	<h2>Going beyond Docker</h2>
 	<ul>
 		<li><a href="http://kubernetes.io/">Kubernetes</a></li>
+		<li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way">Kubernetes The Hard Way></a></li>
 		<li><a href="http://mesos.apache.org/">Apache Mesos</a></li>
 		<li><a href="https://docs.docker.com/swarm/">Docker Swarm</a></li>
 		<li><a href="https://shipyard-project.com/">Shipyard</a></li>
