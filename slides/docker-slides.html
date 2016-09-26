@@ -99,7 +99,7 @@
 	<h1>An Introduction to Docker</h1>
 	<h2>Emily Estes</h2>
 	<h3>2016-09-26 @ DevOps Knoxville Meetup</h3>
-	<h3><a href="https://github.com/emily-e/intro-to-docker">Github repo</a></h3>
+	<h3><a href="https://github.com/emily-e/intro-to-docker">https://github.com/emily-e/intro-to-docker</a></h3>
 	<p>To navigate: left arrow - previous slide, right arrow - next slide, escape - toggle slide show mode.</p>
 </div>
 
@@ -256,7 +256,7 @@ Now you can browse to <a href="http://localhost:8080/index.php">http://localhost
 <p>The "init system" on *nix runs as PID 1, it also often starts up services, like your database, webserver, and cron (for instance). Systemd is a (contentious) popular init system that has recently come to prominence on many distros. Upstartd is another one. The classic SysV init system just ran a bunch of shell scripts to start up services. Launchd is the init system on Mac OS X. Dan Bernstein also came up with a set of tools called "daemontools" which decomposed the idea of process management into several utilities instead of one big program, because that's the "Unix way", and of course, this spawned the creation of many clones and systems inspired by daemontools. There are also other process managers like supervisord. All of these are options to run as PID 1 in a container.</p>
 
 <h3>Supervisord</h3>
-<p>I happen to like supervisord and I probably using it in the majority of the containers I end up writing. By way of example, here is the config file used in the previous example image:</p>
+<p>I happen to like supervisord and I probably end up using it in the majority of the containers I end up writing. By way of example, here is the config file used in the previous example image:</p>
 <pre><code class="ini">[supervisord]
 nodaemon=true
 childlogdir=/var/opt/example/
@@ -276,7 +276,7 @@ autostart=true</code></pre>
 <div class="slide">
 <h1>Plumbing</h1>
 <h2>Volumes</h2>
-<p>Containers are like a running executable. They have state while they are running, but when they are killed all changes to the file system inside the container are erased. Starting a second (or 300th) instance of an image will be completely indepedent of any other instances. This is what is meant when people state that containers are "stateless".</p>
+<p>Containers are like a running executable. They have state while they are running, but when they are killed all changes to the file system inside the container are erased. Starting a second (or 300th) instance of an image will be completely indepedent of any other instances. This is what is meant when people say that containers are "stateless".</p>
 
 <p>Docker provides a concept called a "Volume" to save state between instances. A volume is simply a folder whose contents are preserved between instance starts (they are associated with a container instance not the image). A volume can be mapped to a folder on the host system or a location inside another container. Volumes can be declared in a Dockerfile with the <strong>VOLUME</strong> directive or on the command line when creating an instance via the <em>-v</em> switch:
 <pre><code class="bash">docker run -d --name="example-container" -p 8080:8080 -v ~/example/data:/var/opt/example:rw example</code></pre></p>
