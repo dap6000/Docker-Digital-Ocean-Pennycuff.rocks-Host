@@ -1,0 +1,2044 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Savage Worlds of Shadowrun</title>
+<meta charset="utf-8">
+<meta name="description" content="My attempt to convert the Shadowrun setting to the Savage Worlds ruleset.">
+<meta name="author" content="Derek Pennycuff">
+<style>
+/* reset block level elements */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,p,blockquote,th,td {  
+	margin:0; 
+	padding:0; 
+}
+th, td {
+	padding: 0.5rem;
+	border-left: 1px solid #333;
+	border-bottom: 1px solid #333;
+}
+table {
+	border-right: 1px solid #333;
+	border-top: 1px solid #333;
+	margin: 1rem;
+}
+ul, ol {
+	padding-left: 1rem;
+}
+dt {
+	font-weight:bold;
+}
+li, dt, dd {
+	line-height:1.5rem;
+}
+body {
+	width: 80%;
+	margin: 1.5rem auto;
+	font-size: 100%;
+}
+p, h1, h2, h3, h4, h5, h6 {
+	line-height:1.5rem; /* base line verical rhythm of 24px */
+	margin-top:1.5rem;
+	margin-bottom:1.5rem;
+}
+p { text-align:justify; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.3rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1.1rem; }
+h2, h4, h6 {
+	font-weight: normal;
+	font-style: italic;
+}
+blockquote {
+	background:#111;
+	color:#0f0;
+	padding:1rem;
+	font-family:monospace;
+}
+blockquote a {
+	color:#00f;
+}
+blockquote a:visited {
+	color:#f00;
+}
+blockquote a:hover, blockquote a:active {
+	color:#ff0;
+}
+img { clear: both; }
+img.hero {
+	display: block;
+	width: 100%;
+}
+img.filler {
+	float:left;
+	width: 33%;
+	min-width: 20em;
+	margin:0 1rem 0 0;
+}
+.page_break {
+	display:none;
+	visibility:hidden;
+}
+small {
+	line-height:0.75rem;
+}
+@media print {
+	body {
+		width: auto;
+		padding: 0.1in;
+		margin:0;
+	}
+	img {
+		page-break-inside:avoid;
+		page-break-before:avoid;
+	}
+	.page_break {
+		page-break-after:always;
+	}
+}
+</style>
+</head>
+<body>
+
+<h1>Shadowrun</h1>
+<p>The easiest way to get an idea of the world of Shadowrun is probably <a href="https://www.youtube.com/watch?v=H4hhijKuVW4">this 2 minute YouTube video</a>.</p>
+<iframe width="560" height="315" src="//www.youtube.com/embed/H4hhijKuVW4" frameborder="0" allowfullscreen></iframe>
+<blockquote>
+	<p>In the Sixth World, multinational megacorps pull the world's puppet-strings to benefit their bottom lines—and shadowrunners, folks living on the edge like you and me, do the corps' dirty work for pay. These days, survival means working the shadows; you've got to be willing to lie, steal and kill to stay alive. The technology we depend on doesn't bring us together. Worldwide communications net? Great idea, but not much use when half the population is zoned out on simsense chips and the rest can't access a working dataterminal in the slums where they're forced to live. The rich have gotten richer and the poor a lot more plentiful, so the wealthy barricade themselves in armed enclaves and leave the rest of us to squat and rot. Large chunks of our planet are dying, swallowed by urban sprawl or choked to death by corp polluters. There's still green wilderness in some places, lots of it restored by magic—but I can't see much of it from the sprawl where I live, and neither can hundreds of thousands like me.</p>
+	<p>And then there's the return of magic, which really turned things upside down. The destructive power of the Great Ghost Dance, the shock of watching loved ones turn into trolls, real live dragons showing up on the evening trid—all that and more now are part of our everyday life. </p>
+	<p>Some people might say we're back on track, back into our usual happy routine of slowly destroying ourselves and everything around us. But that's a load of drek. In the last century, do you think people considered installing direct neural implants in their bodies for job security, or had to worry about a neighbor incinerating them with a fireball over a parking dispute? You think they suffered anything comparable to the trauma of goblinizing into something their own families considered a beast? Did they worry about getting brain-fried if they wandered into the wrong end of a computer network, or that some astral peeping-tom might be watching what they were doing in the bedroom? Could they vote for a fragging dragon for President?</p>
+	<p>A lot of things have changed, but some things are still the same. Big business will still screw you as soon as look at you, and for those of us not working for the corps, crime is our meal ticket. </p>
+	<cite><p><small>Adapted from the <a href="http://old.shadowrun4.com/resources/timeline.shtml">official Shadowrun 4th Edition</a> website. The whole thing is worth a read, but don't read anything past 2050, spoilers!</small></p></cite>
+</blockquote>
+<h2>Character Creation</h2>
+<!--
+<h3>Nature</h3>
+<p><small>Idea lifted from <a href="https://www.peginc.com/forum/viewtopic.php?p=371098#371098">the PEG forums</a>. List of nature options adapted from <a href="http://www.deathquaker.org/gaming/archetypes.html">deathquaker.org</a>.</small></p>
+<p><b>Analyst</b>: Anything can be explained rationally, and you will explain it. You get a Benny when your rational/scientific method helps solve a major problem.</p>
+<p><b>Architect</b>: You desire to leave a legacy, tangible or intangible. You get a Benny when you create something of great importance and/or lasting value.</p>
+<p><b>Bureaucrat</b>: You follow the rules no matter what. You get a Benny when you solve a situation by the book, getting others around you to do so as well.</p>
+<p><b>Caregiver</b>: You desire to take care of others, ease their pain, and heal them. You get a Benny whenever you successfully protect or nurture someone else.</p>
+<p><b>Cavalier</b>: You are the hero, the gallant defender of truth, justice, and all that is good. You get a Benny when you accomplish a significant task for the better of the group (or the world as a whole, for that matter).</p>
+<p><b>Conniver</b>: You like to manipulate your way through the sticky bits of life, preferring to let some sucker do the dirty work for you. You get a Benny whenever you trick someone into doing what you want.</p>
+<p><b>Crackerjack</b>: Whatever it is you do, you're the best, and people can't help but be impressed. You get a Benny whenever you pull off an impressive stunt in the face of incredible odds (this may include making a roll of 4 successes or more on something).</p>
+<p><b>Curmudgeon</b>: You're irascible and cynical and vocally so. Joy and laughter? Bah, humbug! You get a Benny when someone does something stupid, as you predicted.</p>
+<p><b>Decoder</b>: You thrive on puzzles and riddles, be they the obvious sort, found in books and games, or hidden within seemingly benign texts or even a person's face. You get a Benny when you solve a particularly challenging puzzle or mystery.</p>
+<p><b>Director</b>: You always know the best way to go about doing something, and it only makes sense that persons follow your lead. You get a Benny when you are able to lead a group in accomplishing a significant task.</p>
+<p><b>Explorer</b>: The world is full of wonder, and you've got to see it all. You get a Benny when you make a significant discovery, such as finding a special place or artifact, or making a profound insight about yourself or a friend.</p>
+<p><b>Fanatic</b>: You have a cause, or maybe the cause has you... You live, eat, breathe this cause (of course, if you pick this one, you have to define what that cause is). You get a Benny when you accomplish something that furthers your cause.</p>
+<p><b>Honest Abe</b>: Honesty is the best policy; integrity is the greatest virtue. You are true to your values and to everyone around you- all the time. You get a Benny when you remain completely honest through a situation where it seems dishonesty would have worked better.</p>
+<p><b>Jester</b>: You are the fool, the comic, the smartass, always looking for the humor in a situation. You get a Benny when you lift someone's spirits/ease their pain with your humor.</p>
+<p><b>Judge</b>: You are an arbitrator and peacemaker, acting as a fair voice in conflictual situations. You get a Benny when you separate truth from lies or successfully mediate a conflict.</p>
+<p><b>Optimist</b>: You can always see that silver lining despite that icky dark cloud looming in front of it. You get a Benny when your conviction that all will turn out for the best gets the group through-and it turns out you're right!</p>
+<p><b>Rebel</b>: You will do as you will, and ultimately desire freedom from unpleasant societal bonds. You get a Benny when your rebellion against authority or the status quo turns out for the best.</p>
+<p><b>Sage</b>: Knowledge is your treasure and your joy, and you enjoy both learning as well as teaching others your wisdom. You get a Benny when you help someone through your vast knowledge or uncover an obscure piece of lore.</p>
+<p><b>Survivor</b>: No matter what happens, you'll pull through it somehow. You're one tough cookie, and don't understand it when others give up so easily. You get a Benny when you survive a difficult situation by the skin of your teeth.</p>
+<p><b>Thrillseeker</b>: The stakes are just never high enough. More adrenaline, please! You get a Benny every time you willingly enter a life-threatening situation and then escape it.</p>
+!-->
+<h3>Races</h3>
+<h4>Human</h4>
+<p>Human (<i>Homo sapiens sapiens</i>) is the metatype that has been around the longest (well, with one possible exception). You know them, you love them, and if you&rsquo;re reading this there&rsquo;s a high probability that you are one. They are balanced in their abilities and tend to have a little larger portion of luck than other metatypes.</p>
+<dl>
+	<dt>Positive Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Adaptable: 1 Free Edge (2 points)</li>
+			<li>Lucky: Start each session with an extra Benny. Stacks with Luck and Great Luck Edges. (2 points)
+		</ul>
+	</dd>
+	<dt>Negative Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>None</li>
+		</ul>
+	</dd>
+</dl>
+<h4>Dwarf</h4>
+<p>Dwarfs (<i>Homo sapiens pumilionis</i>), as you may guess, are shorter and stockier than humans. They tend to be quite strong and very resilient, able to recover from damage ranging from knocks to the head to doses of hemlock. Or knocks to the head with a club wrapped in hemlock leaves. Dwarfs are hard workers and tend to be highly valued by corporations, which means they are more deeply integrated into human society than the other metatypes. They still face discrimination due to their size, and they often have to take steps to make a world built for humans suitable for them.</p>
+<dl>
+	<dt>Positive Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Toughness +1 (1 points)</li>
+			<li>Attribute Increase: Strength starts at d6 (2 points)</li>
+			<li>Infravision (1 point)</li>
+			<li>+2 to Vigor rolls against poison and disease (1 point)</li>
+		</ul>
+	</dd>
+	<dt>Negative Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Pace 5 (-1 Point)</li>
+		</ul>
+	</dd>
+</dl>
+<h4>Elf</h4>
+<p>Elves (<i>Homo sapiens nobilis</i>) are taller than humans, thinner, and have pointed ears. They have an extremely annoying knack for being more nimble than humans, and they generally are better looking to boot. They also have very long lifespans, and continue to look young into their forties and fifties. They have occasionally been known to lord those facts over humans, or anyone who comes within hearing range. While most elves emerged at the Awakening along with the other metatypes, there are rumors that a few elves were hiding somewhere during the magical ebb of the Fifth World, and they are far older than any creature has a right to be.</p>
+<dl>
+	<dt>Positive Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Charisma +2 (1 points)</li>
+			<li>Attribute Increase: Agility starts at d6 (2 points)</li>
+			<li>Low Light Vision (1 point)</li>
+			<li>Parry +1 (1 point)
+		</ul>
+	</dd>
+	<dt>Negative Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Quirk: Elves honestly have a hard time understanding what life is like for non-elves. Their curiosity or confusion about such things can easily seem like arrogance. (-1 point)</li>
+		</ul>
+	</dd>
+</dl>
+<h4>Ork</h4>
+<p>Orks (<i>Homo sapiens robustus</i>) look like the creatures that have been dying by the score in fantasy movies and trideos for almost one hundred fifty years. With protruding brows, prominent tusks, and a large stature, orks have trouble avoiding the stereotype of being unthinkingly violent brutes. It doesn’t help that there are more than a few orks who are happy to live up to that stereotype rather than fight it. The end result is a certain underlying tension between orks and humans, which leads to both groups often preferring to live in separate communities. Elves and orks, on the other hand, often prefer to live in entirely separate countries. Despite the stereotypes, orks can be found in all walks of life, from dank alleys to corporate boardrooms. They have a shorter lifespan than humans, which often leads to them having a certain desperation to pack as much living into their years as they can.</p>
+<dl>
+	<dt>Positive Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Size +1 (adds directly to Toughness) (1 points)</li>
+			<li>Toughness +1 (1 point)</li>
+			<li>Attribute Increase: Strength starts at d6 (2 points)</li>
+			<li>Low Light Vision (1 point)</li>
+		</ul>
+	</dd>
+	<dt>Negative Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Goblinoid: -2 Charisma, ignore when interacting with other orks or trolls (-1 point)</li>
+		</ul>
+	</dd>
+</dl>
+<h4>Troll</h4>
+<p>Trolls (<i>Homo sapiens ingentis</i>) make orks look like the ordinary man on the street. Orks might be, on average, less than a quarter-meter taller than humans; trolls, by contrast, are more than a half-meter taller than orks. Orks might look like a monstrous version of humanity; trolls, on the other hand, look like vaguely human versions of the creature from your most recent nightmare. With thick, curled horns on their heads (some trolls prefer to have them cut, while others polish them with pride), spiky protrusions of calcium on their joints, and individual muscles that are larger than a full-grown pig, trolls give the immediate impression that they are built for destruction. Most of them are able to live up to that image. Not all trolls, though, are about absorbing and inflicting damage. They have tried to find their way into different roles, but their large size combines with cultural stereotypes to make it hard for them to fit in. Orks tend to be the most accepting of trolls, and the two metatypes often inhabit the same neighborhoods. Typically these are not the most resource-rich neighborhoods in any given sprawl.</p>
+<dl>
+	<dt>Positive Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Size +3 (adds directly to Toughness) (3 points)</li>
+			<li>Attribute Increase: Strength starts at d8 (4 points)</li>
+			<li>Infravision (1 point)</li>
+			<li>Reach +1 (1 point)</li>
+		</ul>
+	</dd>
+	<dt>Negative Racial Abilities</dt>
+	<dd>
+		<ul>
+			<li>Goblinoid: -2 Charisma, ignore when interacting with other trolls or orks (-1 point)</li>
+			<li>The <b>Really</b> Big &amp; Tall Shop: Troll sized personal equipment (including most weapons and cyberwear) costs 25% more than list price (-2 points)</li>
+			<li>Aggression Magnet: Most people feel intimidated or threatened just being near a troll, making it harder to keep the peace. Any violence that erupts is usually directed at the troll first. (-2 points)</li>
+		</ul>
+	</dd>
+</dl>
+<h2>Edges</h2>
+<p>All the edges from Savage Worlds Delux are allowed except for Nobel, Power Points, Rapid Recharge, Improved Rapid Recharge, Soul Drain, Champion, Gadgeteer, Holy / Unholy Warrior, Mentalist, and Wizard. Adept is replaced by the Physical Adept Arcane Background. Connections work a bit differently, see the fan produced Savage Worlds of Shadowrun for details. Also the following edges from that supplement are allowed:</p> 
+<ul>
+	<li>Blandness</li>
+	<li>Doctor</li>
+	<li>Double Jointed (bonus applies to Athletics)</li>
+	<li>Good Rep</li>
+	<li>Hacker</li>
+	<li>Quick Reload</li>
+	<li>Rigger</li>
+	<li>Improved Rigging</li>
+	<li>Sprawlsman</li>
+</ul>
+<h3>New Edges</h3>
+<dl>
+	<dt>Astral Connection</dt>
+	<dd>
+		<p><b>Requirements</b>: Novice, Arcane Background Shaman or Mage, Magic d6, Essence 4+</p>
+		<p>+2 to all Magic rolls.</p>
+	</dd>
+</dl>
+<h2>Hindrances</h2>
+<p>All the hindrances from Savage Worlds Deluxe are allowed except for Doubting Thomas and Wanted. The All Thumbs hindrance is considered Major rather than Minor in a technology heavy setting like Shadowrun. Some additional hindrances are allowed from the fan produced Savage Worlds of Shadowrun:</p>
+<ul>
+	<li>Arcane Beacon (Minor) - You are easy to read, at least on the astral plane.</li>
+	<li>Bad Liar (Minor) - You suck at telling convincing lies.</li>
+	<li>Chiphead (Minor/Major) - You are addicted to simsense chips.</li>
+	<li>Cranial Bomb (Major) - You got a bomb in your head.</li>
+	<li>Dead Weight (Major) - Someone close to you adds a lot of complication to your life.</li>
+	<li>Debt (Minor/Major) - You've got extra cash, for now, but soon you'll have to pay up.</li>
+	<li>Elf Poser (Minor) - You pretend to be an elf. You think this makes you look cool. Most people disagree.</li>
+	<li>Freeze Up (Major) - You begin battle Shaken.</li>
+	<li>Low Pain Tolerance (Major) - Extra penalties when Wounded.</li>
+	<li>Nightmares (Minor) - Chance of Fatigue.</li>
+	<li>Ork Poser (Minor) - You pretend to be an ork. You think this makes you look like a badass. Most people disagree.</li>
+	<li>Primadonna (Minor) - You are hard to work with.</li>
+	<li>Secret (Minor/Major) - This one is largely up to you.</li>
+	<li>SINner (Minor/Major) - Unlike most Shadowrunners, you are "in the system." It's much easier for the legal system to keep tabs on you.</li>
+</ul>
+<p>And the following hindrances from Interface Zero are allowed:</p>
+<ul>
+<li>Magnet - You often attract unwanted attention.</li>
+</ul>
+<h2>Gear</h2>
+<h3>Melee Weapons</h3>
+<ul>
+<li><strong>Asp</strong>: An easily concealed telescoping baton that extends with a flick of the wrist.</li>
+<li><strong>Club</strong>: From baseball bats to knight sticks "liberated" from LoneStar to scrap lumber, clubs are a popular choice for self defense in the Sprawl.</li>
+<li><strong>Combat Axe</strong>: If your fashion statement is “frag off,” this two-handed laser-honed axe is for you.</li>
+<li><strong>Forearm Snap-Blades</strong>: All of the style of cyber-spurs without the elective surgery. These blades extend and retract with a gesture (as a Free Action).</li>
+<li><strong>Katana</strong>: The two-handed “samurai” sword. Wearing one of these marks you as a true street samurai. Or a poser. Either way, it’s a deadly weapon.</li>
+<li><strong>Knife</strong>: The perfect tool for cutting ropes, fabric, food, and gangers.</li>
+<li><strong>Monofilament Sword</strong>: A shiny new development from Ares America combines the deadly cutting edge of monofilament with the street cred of a sword.</li>
+<li><strong>Monofilament Whip</strong>: The retractable monofilament isn’t quite monomolecular, but you can see it from there. The weight on the end of the monofilament makes the weapon dangerous.</li>
+<li><strong>Polearm</strong>: A blade on a long stick says one of two things about you: either you’re a troll and don’t care what other people think, or you’re not a troll but can open them up from two meters away.</li>
+<li><strong>Shock Glove</strong>: Reach out and electrocute someone. Each glove can hold eight charges and takes about an hour to recharge fully.</li>
+<li><strong>Staff</strong>: Popular with magicians, people who look like magicians, people who wish they were magicians, and people who like to hit other people in the face with sticks.</li>
+<li><strong>Stun Baton</strong>: The “riot management apparatus” of choice for the Lone Star cop on the beat.</li>
+<li><strong>Survival Knife</strong>: This knife includes a tiny compass, a micro-lighter, a glow stick, and a (replaceable) trauma patch.</li>
+<li><strong>Sword</strong>: The sharp part goes into the target, who ideally screams and bleeds.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Damage</th>
+			<th scope="col">Cost</th>
+			<th scope="col">Notes</th>
+		</tr>
+	<thead>
+	<tbody>
+		<tr>
+			<th scope="row">Asp</th>
+			<td>Str+d4</td>
+			<td>20¥</td>
+			<td>–2 to be Noticed if hidden</td>
+		</tr>
+		<tr>
+			<th scope="row">Club</th>
+			<td>Str+d4</td>
+			<td>10¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Combat Axe</th>
+			<td>Str+d8</td>
+			<td>600¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Forearm Snap-Blades</th>
+			<td>Str+d6</td>
+			<td>150¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Katana</th>
+			<td>Str+d6+2</td>
+			<td>1,000¥</td>
+			<td>Armor Piercing: 2</td>
+		</tr>
+		<tr>
+			<th scope="row">Knife</th>
+			<td>Str+d4</td>
+			<td>20¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Monofilament Sword</th>
+			<td>Str+d8+2</td>
+			<td>1,250¥</td>
+			<td>Armor Piercing: 4</td>
+		</tr>
+		<tr>
+			<th scope="row">Monofilament Whip</th>
+			<td>Agl+d6</td>
+			<td>3,000¥</td>
+			<td>Armor Piercing: 4, Reach: 3, A 1 on the attack die means you hit yourself, ouch.</td>
+		</tr>
+		<tr>
+			<th scope="row">Polearm</th>
+			<td>Str+d8</td>
+			<td>1,000¥</td>
+			<td>Reach 2, requires 2 hands</td>
+		</tr>
+		<tr>
+			<th scope="row">Shock Glove</th>
+			<td>-</td>
+			<td>950¥</td>
+			<td>Touch attack, target makes Vigor roll at -2 or becomes Shaken</td>
+		</tr>
+		<tr>
+			<th scope="row">Staff</th>
+			<td>Str+d4</td>
+			<td>50¥</td>
+			<td>Parry +1, Reach 1, 2 hands</td>
+		</tr>
+		<tr>
+			<th scope="row">Stun Baton</th>
+			<td>Str+d4</td>
+			<td>400¥</td>
+			<td>After applying damage as normal, target makes Vigor roll at -2 or becomes Shaken</td>
+		</tr>
+		<tr>
+			<th scope="row">Survival Knife</th>
+			<td>Str+d4</td>
+			<td>550¥</td>
+			<td>Contains supplies that add +1 to Survival rolls</td>
+		</tr>
+		<tr>
+			<th scope="row">Sword</th>
+			<td>Str+d8</td>
+			<td>350¥</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<h3>Projectile Weapons</h3>
+<ul>
+<li><strong>Bow</strong>: Load, draw, shoot, create pincushion. Repeat as necessary.</li>
+<li><strong>Crossbow</strong>: A little more range, a little more punch, and a little more time to reload.</li>
+<li><strong>Shuriken</strong>: Light, sharp, easily hidden, and very stylish.</li>
+<li><strong>Throwing Knife</strong>: The choice of bar fight snipers.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col">Cost</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Bow</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>250¥</td>
+			<td>Minimum Strength: d6</td>
+		</tr>
+		<tr>
+			<th scope="row">Crossbow</th>
+			<td>15/30/60</td>
+			<td>2d6</td>
+			<td>500¥</td>
+			<td>Minimum Strength: d6, Armor Piercing: 2, 1 action to reload</td>
+		</tr>
+		<tr>
+			<th scope="row">Shuriken</th>
+			<td>4/8/16</td>
+			<td>Str+d6</td>
+			<td>75¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Throwing Knife</th>
+			<td>3/6/12</td>
+			<td>Str+d4</td>
+			<td>25¥</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<h3>Firearms</h3>
+<h4>Pistols</h4>
+<ul>
+<li><strong>Ares Predator</strong>: The end of the barrel of a Predator has been a calling card for runners since time immemorial. Its popularity, which is tied to its price, punch, and profile, has made it almost as iconic as the katana.</li>
+<li><strong>Beretta Model 101T</strong>: When you fieldstrip a dead security guard, you’ll probably find one of these.</li>
+<li><strong>Browning Max-Power</strong>: Browning tried to make a weapon as good as the Predator, and ended up making pretty much the same weapon. To state it somewhat more positively, if you can’t get an Ares, this one’s just as good.</li>
+<li><strong>Colt America L36</strong>: This pistol is the most popular choice of safety-conscious sararimen thanks to its reliability and availability.</li>
+<li><strong>Fichetti Security 500</strong>: This weapon is designed for light security work. It comes complete with a 22-round extended clip and a detachable shoulder stock.</li>
+<li><strong>Ruger Super Warhawk</strong>: This weapon doesn’t accept a silencer, partially because it’s a revolver, but mostly because you don’t buy a Super Warhawk because you want to be subtle.</li>
+<li><strong>Streetline Special</strong>: Small, lightweight, highly concealable, highly available, but of limited reliability. The choice of successful squatters and unsuccessful gangers everywhere.</li>
+<li><strong>Walther Palm Pistol</strong>: Slick and European. Its over-under configuration allows its two-round capacity to be fired at the same time.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Ares Predator</th>
+			<td>15/30/60</td>
+			<td>2d8</td>
+			<td>1</td>
+			<td>450¥</td>
+			<td>15</td>
+			<td></td>
+			<td>Armor Piercing: 2</td>
+		</tr>
+		<tr>
+			<th scope="row">Beretta Model 101T</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>1</td>
+			<td>350¥</td>
+			<td>12</td>
+			<td></td>
+			<td>Armor Piercing: 1</td>
+		</tr>
+		<tr>
+			<th scope="row">Browning Max-Power</th>
+			<td>15/30/60</td>
+			<td>2d8</td>
+			<td>1</td>
+			<td>450¥</td>
+			<td>10</td>
+			<td></td>
+			<td>Armor Piercing: 2</td>
+		</tr>
+		<tr>
+			<th scope="row">Colt America L36</th>
+			<td>12/24/48</td>
+			<td>2d6+1</td>
+			<td>1</td>
+			<td>350¥</td>
+			<td>11</td>
+			<td></td>
+			<td>Armor Piercing: 1</td>
+		</tr>
+		<tr>
+			<th scope="row">Fichetti Security 500</th>
+			<td>12/24/48</td>
+			<td>2d6+1</td>
+			<td>1</td>
+			<td>400¥</td>
+			<td>22</td>
+			<td></td>
+			<td>Armor Piercing: 1</td>
+		</tr>
+		<tr>
+			<th scope="row">Ruger Super Warhawk</th>
+			<td>12/24/48</td>
+			<td>2d6+1</td>
+			<td>1</td>
+			<td>300¥</td>
+			<td>6</td>
+			<td></td>
+			<td>Armor Piercing: 1, Revolver</td>
+		</tr>
+		<tr>
+			<th scope="row">Streetline Special</th>
+			<td>10/20/40</td>
+			<td>2d6-1</td>
+			<td>1</td>
+			<td>100¥</td>
+			<td>6</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Walther Palm Pistol</th>
+			<td>5/10/20</td>
+			<td>2d6+1</td>
+			<td>1</td>
+			<td>200¥</td>
+			<td>2</td>
+			<td></td>
+			<td>Armor Piercing: 1, Double Tap</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>Machine Pistols</h4>
+<ul>
+<li><strong>Ares Crusader MP 6</strong>: It’s got an integrated gas vent system and an extended clip, so feel free to run this puppy dry the next time the organic drek hits the airflow enhancer.</li>
+<li><strong>Ceska Black Scorpion</strong>: This Czech weapon is pure gold on the street; it doesn’t pack the same amount of features as the Crusader, but that usually means you can get it for cheaper. This machine pistol comes with a folding stock.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Ares Crusader MP 6</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>3</td>
+			<td>950¥</td>
+			<td>40</td>
+			<td></td>
+			<td>Armor Piercing: 1, 3 Round Burst, Full Auto, Gas vent system</td>
+		</tr>
+		<tr>
+			<th scope="row">Ceska Black Scorpion</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>3</td>
+			<td>850¥</td>
+			<td>35</td>
+			<td></td>
+			<td>Armor Piercing: 1, 3 Round Burst, Full Auto</td>
+		</tr>
+	</tbody>
+</table>
+<h4>Shotguns</h4>
+<p>Shotguns fire a spread of metal balls (also called “shot”), and so do more damage at close range where the spread is less and more of the shot hits the target. Farther away, the shot spreads more and causes less damage. Because of the increased chance of hitting someone due to the spread, shotguns add +2 to their user’s Shooting rolls. They cause 1d6 damage at Long range, 2d6 at Medium, and 3d6 at Short range.</p>
+<ul>
+<li><strong>Defiance T-250</strong>: This snub-nose shotgun is relatively easy to conceal.</li>
+<li><strong>Enfield AS-7</strong>: Nothing says massive firepower like ten kilos of supersonic lead flying through the air in the form of deadly little pellets. The weapon also boasts an integral laser sight and plenty of ammunition capacity.</li>
+<li><strong>Remington Roomsweeper</strong>: The other iconic heavy pistol for shadowrunners, this “hogleg” uses shotgun ammunition in a heavy pistol form factor. When asked whether the Roomsweeper was available in a slug-round version, a Remington spokesperson snickered.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Defiance T-250</th>
+			<td>12/24/48</td>
+			<td>1-3d6</td>
+			<td>1</td>
+			<td>300¥</td>
+			<td>5</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Enfield AS-7</th>
+			<td>12/24/48</td>
+			<td>1-3d6</td>
+			<td>3</td>
+			<td>1,000¥</td>
+			<td>24</td>
+			<td></td>
+			<td>3 Round Burst, Full Auto, Laser Site</td>
+		</tr>
+		<tr>
+			<th scope="row">Remington Roomsweeper</th>
+			<td>12/24/48</td>
+			<td>1-3d6</td>
+			<td>1</td>
+			<td>500¥</td>
+			<td>8</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<h4>Assault Rifles</h4>
+<ul>
+<li><strong>AK-97</strong>: Originally a Soviet weapon, this assault rifle is now found worldwide. It’s quite versatile, available in a carbine model (see submachine guns) or as the AK-98, which includes an integral mini-grenade launcher mounted on the under-barrel.</li>
+<li><strong>Colt M22A2</strong>: This affordable engine of death features built-in vision magnification, underbarrel grenade launcher, and a Gas-Vent system to help put more lead on the target.</li>
+<li><strong>FN HAR</strong>: This weapon is selling like hotcakes with corporate security forces. If you were one of the lucky few who pre-ordered, you also got an exclusive signed Irma Crackshot poster. It (the gun, not the poster) is tricked out with a folding stock, gas-vent system, and an integral laser sight.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">AK-97</th>
+			<td>24/48/96</td>
+			<td>2d8+1</td>
+			<td>3</td>
+			<td>700¥</td>
+			<td>22</td>
+			<td>d6</td>
+			<td>Armor Piercing: 2, Full Auto, 3 Round Burst</td>
+		</tr>
+		<tr>
+			<th scope="row">AK-98</th>
+			<td>24/48/96</td>
+			<td>2d8+1</td>
+			<td>3</td>
+			<td>2,500¥</td>
+			<td>22</td>
+			<td>d6</td>
+			<td>Armor Piercing: 2, Full Auto, 3 Round Burst, Grenade Launcher</td>
+		</tr>
+		<tr>
+			<th scope="row">Colt M22A2</th>
+			<td>24/48/96</td>
+			<td>2d8</td>
+			<td>3</td>
+			<td>1,600¥</td>
+			<td>40</td>
+			<td></td>
+			<td>Armor Piercing: 2, Full Auto, 3 Round Burst, Grenade Launcher, Scope, Gas Vent System</td>
+		</tr>
+		<tr>
+			<th scope="row">FN HAR</th>
+			<td>24/48/96</td>
+			<td>2d8</td>
+			<td>3</td>
+			<td>1,200¥</td>
+			<td>20</td>
+			<td></td>
+			<td>Armor Piercing: 2, Full Auto, 3 Round Burst, Laser Sight, Gas Vent System</td>
+		</tr>
+	</tbody>
+</table>
+<h4>Rifles</h4>
+<ul>
+<li><strong>Ranger Arms SM-3</strong>: This rifle features a silencer, and an imaging scope with magnification, and either thermographic, or low-light vision enhancements. For the assassin on the go, it breaks down to fit into a briefcase.</li>
+<li><strong>Remington 750</strong>: This long, sleek sport rifle is perfect for picking off gangers, dropping drones, and occasionally even for hunting. It comes with a top- mounted magnification scope and no underbarrel mounting options.</li>
+<li><strong>Remington 950</strong>: Bigger and louder than its little sister, this weapon is otherwise identical to the Remington 750.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Ranger Arms SM-3</th>
+			<td>50/100/200</td>
+			<td>2d10</td>
+			<td>1</td>
+			<td>4,000¥</td>
+			<td>6</td>
+			<td>d8</td>
+			<td>Armor Piercing: 4, Heavy Weapon, Snapfire, Silencer, Scope, Thermographic <em>or</em> Low-Light Vision Enhancement (not both)</td>
+		</tr>
+		<tr>
+			<th scope="row">Remington 750</th>
+			<td>24/48/96</td>
+			<td>2d8</td>
+			<td>1</td>
+			<td>600¥</td>
+			<td>5</td>
+			<td>d6</td>
+			<td>Armor Piercing: 2, Scope</td>
+		</tr>
+		<tr>
+			<th scope="row">Remington 950</th>
+			<td>30/60/120</td>
+			<td>2d10</td>
+			<td>1</td>
+			<td>800¥</td>
+			<td>5</td>
+			<td>D8</td>
+			<td>Armor Piercing: 2, Snapfire</td>
+		</tr>
+	</tbody>
+</table>
+<h4>Submachine Guns</h4>
+<ul>
+<li><strong>AK-97 Carbine</strong>: The submachine gun version of the venerable AK-97 assault rifle.</li>
+<li><strong>Beretta Model 70</strong>: Its bullpup design, integral laser sight, and sound-suppressor barrel make this compact and powerful weapon perfect for covert action.</li>
+<li><strong>Heckler &amp; Koch HK227</strong>: If you’re facing corporate autofire, chances are it’s coming out of an HK227, so why not send some back the same way? This SMG comes equipped with a retractable stock, an integral laser sight, and a gas-vent system.</li>
+<li><strong>Uzi III</strong>: The famous Israeli Uzi is gone, but Fabrique Nationale picked up the popular series and kept it going strong, adding an integral laser sight and a folding stock to the standard model.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">AK-97 Carbine</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>3</td>
+			<td>800¥</td>
+			<td>30</td>
+			<td></td>
+			<td>Armor Piercing: 1, Full Auto, 3 Round Burst</td>
+		</tr>
+		<tr>
+			<th scope="row">Beretta Model 70</th>
+			<td>12/24/48</td>
+			<td>2d6+1</td>
+			<td>3</td>
+			<td>900¥</td>
+			<td>35</td>
+			<td></td>
+			<td>Armor Piercing: 1, Full Auto, 3 Round Burst, Silencer, Laser Sight</td>
+		</tr>
+		<tr>
+			<th scope="row">Heckler &amp; Koch HK227</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>3</td>
+			<td>1,500¥</td>
+			<td>28</td>
+			<td></td>
+			<td>Armor Piercing: 1, Full Auto, 3 Round Burst, Laser Sight, Gas Vent System</td>
+		</tr>
+		<tr>
+			<th scope="row">Uzi III</th>
+			<td>12/24/48</td>
+			<td>2d6</td>
+			<td>3</td>
+			<td>600¥</td>
+			<td>24</td>
+			<td></td>
+			<td>Armor Piercing: 1, 3 Round Burst</td>
+		</tr>
+	</tbody>
+</table>
+<h4>Light Machine Guns</h4>
+<ul>
+<li><strong>Ingram Valiant</strong>: Like you, this light machine gun comes loaded for bear with a hip-brace and a gas-vent system on the barrel.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Range</th>
+			<th scope="col">Damage</th>
+			<th scope="col"><abbr title="Rate of Fire">RoF</abbr></th>
+			<th scope="col">Cost</th>
+			<th scope="col">Shots</th>
+			<th scope="col"><abbr title="Minimum Strength">Min Str</abbr></th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Ingram Valiant</th>
+			<td>30/60/120</td>
+			<td>2d8+1</td>
+			<td>3</td>
+			<td>1,500¥</td>
+			<td>50 or 100</td>
+			<td>d8</td>
+			<td>Armor Piercing: 2, Full Auto, 3 Round Burst, Snapfire, Gas Vent System</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Firearm Accessories</h3>
+<ul>
+<li><strong>Bipod</strong>: A two-legged brace that can be folded down along the barrel. When you use it with the bipod resting on something (usually the ground or a low wall), you can ignore 1 point of Recoil penalty.</li>
+<li><strong>Concealable Holster</strong>: This custom-fit holster modifies attempts to Notice the weapon in it (pistol size or smaller, thank you) by –2.</li>
+<li><strong>Gas-Vent System</strong>: Attach this boxy accessory to your weapon’s barrel to vent the firing gasses to help counteract 1 point of Recoil. This modification is permanent.</li>
+<li><strong>Grenade Launcher</strong>: This under-barrel addition adds grenade launching to your slug-throwing fun. The grenade launcher is single-shot and can hold up to six mini-grenades in its internal magazine.</li>
+<li><strong>Gyro Stabilization</strong>: Sure, the harness makes you look like you’re wearing lederhosen, but the system lets you ignore up to 2 points of penalties from either recoil or movement modifiers. It takes five minutes to get into the thing, but only an action to hit the quick release and drop it and the mounted weapon to the ground. As far as Concealability is concerned, don’t bother: it’s pretty noticeable.</li>
+<li><strong>Imaging Scope</strong>: Imaging scopes can be digital or optical. Both varieties come with magnification. You can cast spells through optical scopes, but only digital ones can take vision enhancements (sold separately). Either variety allows you to ignore up to 2 points of penalty to Shooting rolls due to range modifiers.</li>
+<li><strong>Laser Sight</strong>: When you touch the trigger, the laser sight puts a red (or green, or blue, or what- ever your taste) dot onto the target to let you know where you’re going to hit. Laser sights can be installed as top or under-barrel accessories (or both, if you’re in the mood). In any turn you choose to not move, you may add +2 to your Shooting roll as if you took the Aim maneuver.</li>
+<li><strong>Silencer</strong>: Silencers reduce the sound and flash from a single-shot or semi-automatic weapon, which means a –2 modifier to Notice the shot.</li>
+<li><strong>Smart Goggles</strong>: These oversized goggles use a fiber optic cable to connect to a smartgun. Since the goggles don’t include the motor feedback of a real smartlink, they only compensate for up to 2 points of negative modifiers. You can get low-light and/or infrared included in the goggles for an extra 1,000¥ per feature.</li>
+<li><strong>Smartgun System</strong>: This is either an internal or external smartgun system, intended to work with a smartlink or smart goggles. If you don’t have a smartlink or smart goggles, don’t bother buying it.</li>
+<li><strong>Spare Clip</strong>: Um ... it’s a spare clip. Pick a specific weapon model that the clip fits.</li>
+<li><strong>Speed Loader</strong>: This ring of holes is used to load a revolver quickly.</li>
+<li><strong>Tripod</strong>: A giant bipod with a third leg, a tripod offers +6 recoil compensation. Its Concealability modifier is “hey look, a tripod!”</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Mount</th>
+			<th scope="col">Cost</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Bipod</th>
+			<td>Under</td>
+			<td>400¥</td>
+			<td>Ignore 1 point of Recoil</td>
+		</tr>
+		<tr>
+			<th scope="row">Concealable Holster</th>
+			<td>-</td>
+			<td>100¥</td>
+			<td>-2 to Notice weapon</td>
+		</tr>
+		<tr>
+			<th scope="row">Gas-Vent System</th>
+			<td>Barrel</td>
+			<td>450¥</td>
+			<td>Ignore 1 point of Recoil</td>
+		</tr>
+		<tr>
+			<th scope="row">Grenade Launcher</th>
+			<td>Under</td>
+			<td>1,700¥</td>
+			<td>See Ammunition section</td>
+		</tr>
+		<tr>
+			<th scope="row">Gyro Stabilization</th>
+			<td>Under</td>
+			<td>2,500¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Imaging Scope</th>
+			<td>Top</td>
+			<td>500¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Laser Sight</th>
+			<td>Top/Under</td>
+			<td>500¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Silencer</th>
+			<td>Barrel</td>
+			<td>500¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Smart Goggles</th>
+			<td>-</td>
+			<td>3,000¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">External Smartgun System</th>
+			<td>Top/Under</td>
+			<td>600¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Internal Smartgun System</th>
+			<td>-</td>
+			<td>Weapon Cost</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Spare Clip</th>
+			<td>-</td>
+			<td>5¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Speed Loader</th>
+			<td>-</td>
+			<td>10¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Tripod</th>
+			<td>Bottom</td>
+			<td>600¥</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<h3>Ammunition</h3>
+<ul>
+	<li><strong>Armor Piercing</strong>: When the bullet hits the target, the dense sub-projectile punches through any armor, barrier, or troll it might hit.</li>
+	<li><strong>Explosive Rounds</strong>: Like tiny grenades, these rounds explode loudly on contact. They have a tendency to misfire and explode in the weapon when you critically glitch, and they’re extremely allergic to fire and electrical attacks, but otherwise they’re perfectly safe (for you, at least).</li>
+	<li><strong>Flechette Rounds</strong>: Whether in the form of buckshot or frangible solid rounds, this ammo does a number on unarmored targets, and is even a bit more dangerous to lightly armored ones.</li>
+	<li><strong>Gel Rounds</strong>: Sometimes you can’t actually geek your target, and these crowd-control rounds are the perfect solution. They change your weapon’s damage to Nonlethal, but otherwise act like normal rounds. Also good for uncooperative extraction targets.</li>
+	<li><strong>Narcoject Darts</strong>: Designed for the Narcoject&trade; non-fatal dart gun series. Toxin sold separately.</li>
+	<li><strong>Regular Ammo</strong>: Regular, vanilla, lead rounds. Send some down-range today. Includes arrows and crossbow bolts.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Cost*</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Armor Piercing</th>
+			<td>70¥</td>
+			<td>Armor Piercing +2</td>
+		</tr>
+		<tr>
+			<th scope="row">Explosive Rounds</th>
+			<td>100¥</td>
+			<td>Damage goes up by a die type</td>
+		</tr>
+		<tr>
+			<th scope="row">Flechette Rounds</th>
+			<td>100¥</td>
+			<td>+4 damage but double target's Armor rating</td>
+		</tr>
+		<tr>
+			<th scope="row">Gel Rounds</th>
+			<td>30¥</td>
+			<td>Nonlethal</td>
+		</tr>
+		<tr>
+			<th scope="row">Narcoject Darts</th>
+			<td>200¥</td>
+			<td>Damage and effects based on toxin used in dart</td>
+		</tr>
+		<tr>
+			<th scope="row">Regular Ammo</th>
+			<td>20¥</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<p><small>* Price is per 20 shots</small></p>
+<h3>Grenades</h3>
+<ul>
+<li><strong>Antipersonnel</strong>: This grenade scatters micro munitions over a large burst template area</li>
+<li><strong>Flash Bang</strong>: Grenades which cause non-lethal damage. Audio and visual compensators built into the helmets or cyberware count as 4 points of armor against this.</li>
+<li><strong>High Explosive</strong>: Rely on the overpressure from a high-explosive, affecting a smaller area than frag grenades but packing a bigger wallop.</li>
+<li><strong>Incendiary</strong>: Explode with white phosphorus, coating everything in the kill zone in sticky flaming death.</li>
+<li><strong>Smoke</strong>: Thermal smoke blocks normal light, IR, and UV creating −6 obscurement penalty for 1d4+2 rounds before dispersing.</li>
+<li><strong>Tear Gas</strong>: Non-lethal crowd control for over a hundred years. Anyone caught in a Tear gas cloud must make a Vigor roll or become Shaken. Each additional round within the cloud forces another roll with a cumulative −1 to the Vigor roll. Gas masks, and Full Environmental equipment provides protection from Tear Gas.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Damage</th>
+			<th scope="col">Blast</th>
+			<th scope="col">Cost*</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Antipersonnel</th>
+			<td>2d6+2</td>
+			<td>Large</td>
+			<td>35¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Flash Bang</th>
+			<td>2d10</td>
+			<td>Medium</td>
+			<td>45¥</td>
+			<td>Nonlethal</td>
+		</tr>
+		<tr>
+			<th scope="row">High Explosive</th>
+			<td>3d8</td>
+			<td>Medium</td>
+			<td>35¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Incendiary</th>
+			<td>2d8</td>
+			<td>Medium</td>
+			<td>40¥</td>
+			<td>Targets hit will catch fire on a 5+</td>
+		</tr>
+		<tr>
+			<th scope="row">Smoke</th>
+			<td>-</td>
+			<td>Large</td>
+			<td>30¥</td>
+			<td>−6 obscurement penalty for 1d4+2 rounds</td>
+		</tr>
+		<tr>
+			<th scope="row">Tear Gas</th>
+			<td>-</td>
+			<td>Large</td>
+			<td>35¥</td>
+			<td>Vigor roll or become Shaken. Each round of exposure adds a -1 modifier.</td>
+		</tr>
+	</tbody>
+</table>
+<p><small>* Mini-grenades for grenade launchers cost double the listed price.</small></p>
+<h4>Range</h4>
+<p>Thrown grenades have range 5/10/20. Grenade launcher has range 12/24/48.</p>
+<h3>Clothing and Armor</h3>
+<ul>
+<li><strong>Armor Clothing</strong>: Subtle, tasteful, and reasonably bullet-resistant, this gives you a minimum of protection while allowing you to go out in public without looking like an extra from a war movie.</li>
+<li><strong>Armor Jacket</strong>: Most runners find this padded- and-plated jacket to be the best compromise between protection and fashion.</li>
+<li><strong>Armor Vest</strong>: Not as much protection as the jacket, but more versatile. You can wear this under your clothes, although it might look a bit bulky.</li>
+<li><strong>Clothing</strong>: Regular old clothes. No armor plates poking out, but no protection from flying death. It’s a weapon of a different kind, though, as the right look always helps pave the way for good relations.</li>
+<li><strong>Form-Fitting Body Armor</strong>: Armored underwear— what will they think of next?</li>
+<li><strong>Helmet</strong>: This bit of outerwear adds to your armor rating. Most corporate helmets come with logos or distinctive styling, like Lone Star’s swept visor. Naturally this means that subtlety goes right out the window.</li>
+<li><strong>Heavy Armor</strong>: This unsubtle, uncompromising suit of armor is intimidating as well as protective. Full suits cover the entire body, from boots to brainpan.</li>
+<li><strong>Leather</strong>: Nothing says style like a set of leathers. Not only does it look great, but it even provides a bit more protection than ordinary clothing. And hey, there’s nothing wrong with synthetic if you don’t have the jing for the real thing, right?</li>
+<li><strong>Lined Coat</strong>: This armored trench coat or duster (or an Ulster coat for that classy look) modifies attempts to Notice the things hidden under it by –2. Also looks really excellent when the wind is blowing or when you are jumping off something.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Type</th>
+			<th scope="col">Rating</th>
+			<th scope="col">Cost</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Armor Clothing</th>
+			<td>2</td>
+			<td>500¥</td>
+			<td>Covers all but head</td>
+		</tr>
+		<tr>
+			<th scope="row">Armor Jacket</th>
+			<td>4</td>
+			<td>900¥</td>
+			<td>Covers all but head</td>
+		</tr>
+		<tr>
+			<th scope="row">Armor Vest</th>
+			<td>3</td>
+			<td>200¥</td>
+			<td>Covers torso</td>
+		</tr>
+		<tr>
+			<th scope="row">Clothing</th>
+			<td>0</td>
+			<td>50 - 5,000¥</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th scope="row">Form-Fitting Body Armor</th>
+			<td>2</td>
+			<td>500¥</td>
+			<td>Covers all but head, can wear under normal clothes</td>
+		</tr>
+		<tr>
+			<th scope="row">Helmet</th>
+			<td>2</td>
+			<td>200¥</td>
+			<td>Covers head</td>
+		</tr>
+		<tr>
+			<th scope="row">Heavy Armor</th>
+			<td>6</td>
+			<td>20,000¥</td>
+			<td>Covers everything</td>
+		</tr>
+		<tr>
+			<th scope="row">Leather, Real</th>
+			<td>2</td>
+			<td>750¥</td>
+			<td>Covers all but head</td>
+		</tr>
+		<tr>
+			<th scope="row">Leather, Synthetic</th>
+			<td>1</td>
+			<td>250¥</td>
+			<td>Covers all but head</td>
+		</tr>
+		<tr>
+			<th scope="row">Lined Coat</th>
+			<td>3</td>
+			<td>700¥</td>
+			<td>Covers all but head</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Electronics</h3>
+<ul>
+<li><strong>Bug Scanner</strong>: This is a handheld device that scans for monitoring devices and trackers that are actively transmitting.</li>
+<li><strong>Dataline Tap</strong>: After you splice this into a dataline, it will transmit a copy of everything sent over that dataline to you, from up to five kilometers away.</li>
+<li><strong>Jammer</strong>: This device sends electromagnetic noise into the ether (but not the astral), making useful radio transmissions impossible within 100 meters of it.</li>
+<li><strong>Laser Microphone</strong>: An invisible beam of infrared laser light is fired out of this device and bounced off a rigid surface (like a window). The laser mic can then detect the vibrations of that surface and “hear” any sounds made near either side of it.</li>
+<li><strong>Maglock Passkey</strong>: Where there’s a lock, there’s an illegal way to pick it. This electronic device can fool a maglock into opening for you (with a successful Hacking roll). The maglock is a bit scrambled afterward, which may be noticed by meat-based security forces.</li>
+<li><strong>Micro-Camcorder</strong>: A device that is equipped with a datasoft slot and can be set to record only when there’s motion. All this fits in a case half the size of a deck of cards.</li>
+<li><strong>Micro-Recorder</strong>: This audio device is the size of a matchbox and has a slot for a datasoft chip. You can set it to record only when there’s noise in order to save on space.</li>
+<li><strong>Micro-Transceiver</strong>: A microphone and radio transmitter the size and shape of a coin with a range of five kilometers.</li>
+<li><strong>Shotgun Microphone</strong>: It’s like a radar dish on a pistol grip, except that it collects sound, amplifying distant noises and conversations by up to twenty times.</li>
+</ul>
+<table>
+	<thead>
+		<tr>
+			<th scope"col">Type</th>
+			<th scope"col">Cost</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Bug Scanner</th>
+			<td>500¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Dataline Tap</th>
+			<td>5,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Jammer</th>
+			<td>1,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Laser Microphone</th>
+			<td>1,500¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Maglock Passkey</th>
+			<td>5,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Micro-Camcorder</th>
+			<td>2,500¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Micro-Recorder</th>
+			<td>1,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Micro-Transceiver</th>
+			<td>2,500¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Shotgun Microphone</th>
+			<td>1,000¥</td>
+		</tr>
+	</tbody>
+</table>
+<h3>DockWagon&trade; Contract</h3>
+<p>If you’ve been living under a rock since before the Awakening, then maybe you don’t know that DocWagon&trade; is the premium health insurance of the Sixth World. If you get geeked in a firefight, they’ll send out their High Threat Response (HTR) service, guaranteed to arrive before you expire—or your next of kin gets half your premium back!* When you sign up for a contract through their discreet service, they’ll take a tissue sample (stored in a high-security vault and guarded by bonded guards and magical wards) and give you a sealed-band direct-dial wrist phone that serves as a homing beacon whenever you need help. The phone will call automatically if it detects that you’re within inches of your life or the band is broken. A Gold service contract comes with one free resuscitation per year and half off HTR charges. A Platinum contract gets you four free resuscitations per year and free HTR service (employee death compensation excluded). Don’t leave home without it!</p>
+<p><small><em>* Pre-expiration guarantee not valid in combat zones. Guarantee void during high-threat response, peak demand, or in extraterritorial or low-security areas. Client is responsible for all expenses incurred by HTR service including injury damage, property damage, fuel, ammunition, and pharmaceutical expenditures. No coverage for pre-existing conditions. Rebate must be requested in writing within three (3) business days of incident. Guarantee not valid in cases of self-inflicted injury, injury due to thaumaturgy, acts of God, or injury due to environment. No coverage guarantee available to non-metahumans. Surcharge may apply to trolls. Client assumes liability for damage to cybernetic or bio- augmentation system.</em></small></p>
+<table>
+	<thead>
+		<tr>
+			<th scope"col">Type</th>
+			<th scope"col">Cost</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Basic Contract</th>
+			<td>5,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Gold Contract</th>
+			<td>25,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Platinum Contract</th>
+			<td>50,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">HTR Service</th>
+			<td>5,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Employee Death Compensation</th>
+			<td>20,000¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Resuscitation Service</th>
+			<td>8,000¥</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Medkits</h3>
+<p>Every runner knows the three rules of the street, but the fourth one has got to be “carry a medkit.” Aside from the usual medical supplies, this kit comes with an expert system that can diag- nose problems and recommend treatments. The medkit gives you a +2 modifier to the Healing skill. Every five or six uses, the medkit needs to be restocked with supplies.</p>
+<table>
+	<thead>
+		<tr>
+			<th scope"col">Type</th>
+			<th scope"col">Cost</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">Medkit</th>
+			<td>200¥</td>
+		</tr>
+		<tr>
+			<th scope="row">Medkit Supplies</th>
+			<td>50¥</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Drones</h3>
+<p>Drones are constructed using the Robot rules from the Science Fiction Companion.</p>
+<h4>Surveillance Drone</h4>
+<p>This is a flying rotor drone about the size of a basketball that carries sensors, recording, and transmitting equipment. Police and security like to use them when they can’t handle coverage through manpower.</p>
+<dl>
+	<dt>Cost</dt>
+	<dd>11,000¥</dd>
+	<dt>Attributes</dt>
+	<dd>Agility d8, Smarts d6, Spirit d4, Strength d4, Vigor d4</dd>
+	<dt>Skills</dt>
+	<dd>Notice d8, Shooting d8, Stealth d8</dd>
+	<dt>Pace</dt>
+	<dd>-</dd>
+	<dt>Parry</dt>
+	<dd>2</dd>
+	<dt>Toughness</dt>
+	<dd>6 (4)</dd>
+	<dt>Gear</dt>
+	<dd>The robot has two SMGs rather than arms. Range 15/30/60, Damage 2d6, RoF 4. Each gun has 100 shots.</dd>
+	<dt>Special Abilities</dt>
+	<dd>
+		<ul>
+			<li><strong>Construct</strong>: +2 to recover from being Shaken; does not breathe; immune to poison and disease; ignores one level of wound penalties.</li>
+			<li><strong>Environmental Weakness (Electricity)</strong>: Robots suffer +4 damage from electrical attacks.</li>
+			<li><strong>Armor +4</strong>: Additional plating</li>
+			<li><strong>Flight</strong>: Pace 6”, Climb 1.</li>
+			<li><strong>Immobile</strong>: Sentry bots cannot move except when using their Flight ability</li>
+			<li><strong>Sensor Suite</strong>: +4 Notice vs sound, motion, chemicals, radiation, and electrical fields up to 500 yards distant.</li>
+			<li><strong>Size –2</strong>: Sentry robots are the size of basketballs.</li>
+		</ul>
+	</dd>
+</dl>
+<h2>Cyberware</h2>
+<h3>Standard Cyberware</h3>
+<p>$1,000 and 1 Essence Loss per 1 Augmentation Point</p>
+<h3>Alphaware</h3>
+<p>$5,000 and 1 Essence Loss per 3 Augmentation Points</p>
+<h3>Available Augmentations (From Super Powers Companion)</h3>
+<ul>
+<li>Aquatic (2): Cannot drown. Pace equals Athletics skill.</li>
+<li>Armor (1/Level): +2 Armor. Hardy (+3), Heavy Armor (+4), Partial Protection (–1/–2).</li>
+<li>Awareness (+3/+5): ignore obscurement/Gang Up modifiers.</li>
+<li>Chameleon (3): Imitate another being. Voice (+2).</li>
+<li>Cyber Attribute (2/Step): Increase an attribute's Wild Die by a die type (d8/d10/d12).</li>
+<li>Cyber Edge (2/Level): Grants a Combat Edge.</li>
+<li>Cyber Skill (1/Step): Increase a skill's Wild Die by a die type (d8/d10/d12).</li>
+<li>Danger Sense (2): Notice roll to detect hidden dangers, start ambushes on Hold.</li>
+<li>Extra Actions (3/Level): An additional action per round per level.</li>
+<li>Gifted (2): Ignore –2 penalty when making unskilled rolls.</li>
+<li>Heightened Senses (1/Level): Improved sense or perception. Spatial Sense (+2).</li>
+<li>Holdout Weapon Melee (1/Level): Retractable blades of various sizes. Str + (D6/D8/D10).</li>
+<li>Holdout Weapon Ranged (1/Level): Light Pistol / Heavy Pistol / Shotgun or Submachine Gun</li>
+<li>Immune to Poison / Disease (1 Each): The character cannot be poisoned or infected.</li>
+<li>Sensory Dampeners (1): +2 to rolls to prevent becoming Shaken. Provides 4 points of armor vs flash bang grenades.</li>
+<li>Leaping (1–5): The hero can jump great distances or heights. Bounce (+1), Death From Above (+1).</li>
+<li>Parry (1/Level): Increases Parry.</li>
+<li>Poison (3): Poison foes with a touch. Knockout (+3), Lethal (+5), Strong (+1).</li>
+<li>Regeneration (2/Level): Regenerate wounds. Recovery (+1), Regrowth (+2).</li>
+<li>Smartgun System (4): Ignore up to 4 points of negative modifiers to Shooting rolls when using a compatible weapon.</li>
+<li>Speak Language (1): The hero can speak any language. Written Word (+1).</li>
+<li>Stun (2): Temporarily Incapacitates foes. Area Effect (+2/+4).</li>
+<li>Toughness (1/Level): Increases Toughness. Hardy (+3).</li>
+<li>Uncanny Reflexes (4/8): –2 or –4 to hit the character. Blinding Reflexes (+2).</li>
+<li>Wall Crawler (1): The hero can crawl on horizontal or inverted surfaces.</li>
+</ul>
+<h2>Magic</h2>
+<p>Characters with Arcane Backgrounds simply choose the power they want to activate and make an arcane skill roll. The penalty to the roll is half the power’s usual Power Point cost (rounded down).</p>
+<p>Once cast, check the results below:</p>
+<ul>
+	<li><strong>Success</strong>: The power activates as usual.</li>
+	<li><strong>Raise</strong>: A raise on the roll grants any additional bonuses to the power stated in its description.</li>
+	<li><strong>Failure</strong>: All currently maintained powers are cancelled and the caster is Shaken.</li>
+	<li><strong>Drain</strong>: Channeling magical energy comes with certain risks. If a caster rolls a 1 on the arcane skill die when using a powers it automatically fails and she suffers 2d10 damage. The caster's Essence counts are armor against this damage.</li>
+</ul>
+<h3>Trappings</h3>
+<p>Magic in Shadowrun is as much an art as a science. Powers in the Savage World system are generic by design. The goal is to cut down on bookkeeping with a short but flexible spell list. <strong>Not</strong> to discourage creativity</p>
+<p>Players are encouraged to add flare to any powers their characters possess by describing how that power manifests when <i>your</i> character casts it. Particularly clever or inventive trappings may warrant additional in game effects.</p>
+<p>If you come up with a description you are particularly fond of, write it down to reuse later. If you name your new power you earn a Benny. Once your new version of the power is documented any player character who knows the base power can use the new version. You can continue to come up with additional Trappings for the same power. You don't have to keep using your newly named version every time.</p>
+<h3>Types of Magic</h3>
+<h4>Shaman</h4>
+<p>The shaman is connected to nature and emotion. They feel the heart of the land they walk, even when that land has been bulldozed and slathered in ferro-crete. The world is a living, breathing being made up of all of the living, breathing beings within it. The shaman's power comes from his connection to this spirit.</p>
+<h5>Shamanic Totems</h5>
+<dl>
+	<dt>Bear</dt>
+	<dd>
+		<p>Bear is a Totem found in cultures wherever bears are known, from North America to Europe and Asia. He is powerful, but gentle and wise. He tends to be slow-moving and easygoing unless urgency requires speed. Bear is slow to anger, but terrible in battle. Bear tends to be calm, cool, and collected. He is the healer and protector of the natural world. Bear cannot turn down someone who needs healing without good reason.</p>
+		<p><strong>Advantages</strong>: +2 to Healing, +2 to Greater Healing, +2 to Spirits of the Land</p>
+		<p><strong>Disadvantages</strong>: Gains the Heroic hindrance</p>
+	</dd>
+	<dt>Cat</dt>
+	<dd>
+		<p>Cat is honored in cultures around the world. Cat is often seen as the guardian of mystical secrets, usually involving the afterlife. She certainly knows many secrets, but rarely decides to share them, and never with anyone less than worthy. She is stealthy, sly, and arrogant. Cat toys with her prey—threatening, taunting, and confusing—rather than going directly for the kill.</p>
+		<p><strong>Advantages</strong>: +2 to Deflection, +2 to Speed, +1 die type to Stealth</p>
+		<p><strong>Disadvantages</strong>: Gains the Arrogant hindrance</p>
+	</dd>
+	<dt>Dog</dt>
+	<dd>
+		<p>Dog is a loyal friend. He fights ferociously to defend his home and those under his protection. Dog protects people from harmful magic and dangerous spirits. Dog is loyal, generous, and helpful to those who show him kindness. He is single-minded, often to the point of stubbornness.</p>
+		<p><strong>Advantages</strong>: +2 to Beast Friend, +2 to Shape Change, +2 to summon Spirits of Man</p>
+		<p><strong>Disadvantages</strong>: Gains the Loyal and Stubborn hindrances</p>
+	</dd>
+	<dt>Eagle</dt>
+	<dd>
+		<p>Eagle is the highest-flying bird in the sky, considered the most noble by cultures in North America, Central America, and Europe. He is proud and solitary, and sees everything happening in the world below. Eagles are noble defenders of the purity of nature. They are intolerant of those who do not share their views and have a strong distrust of technology and its tools. Those who damage nature are Eagle’s enemies, and Eagle will brave great danger to defeat polluters and other evildoers.</p>
+		<p><strong>Advantages</strong>: +2 Charisma, +2 to Farsight, +2 to summon Spirits of the Sky</p>
+		<p><strong>Disadvantages</strong>: Gains the Overconfident hindrance</p>
+	</dd>
+	<dt>Rat</dt>
+	<dd>
+		<p>Rat is found wherever humans are, for whom else’s bounty can sustain him? Rat is a scavenger, a stealthy thief who takes what he needs to survive. He dislikes working out in the open, preferring to stick to the shadows. Rat avoids fights whenever he can—when he must fight, he fights to kill.</p>
+		<p><strong>Advantages</strong>: +2 to Environmental Protection, +2 to summon Spirits of Man, +1 die type to Stealth</p>
+		<p><strong>Disadvantages</strong>: Gains the Freeze Up hindrance (see Savage Worlds of Shadowrun page 6)</p>
+	</dd>
+	<dt>Raven</dt>
+	<dd>
+		<p>Raven is a harbinger of trouble in cultures worldwide. He is a trickster and a transformer, dark and devious. Raven thrives off the bounty of carnage and chaos, but does not cause them—he merely knows an opportunity when he sees one. Raven loves to eat and rarely refuses an offer of food.</p>
+		<p><strong>Advantages</strong>: +2 to Bless/Curse, +2 to summon Spirits of the Sky</p>
+		<p><strong>Disadvantages</strong>: Gains the Curious hindrance</p>
+	</dd>
+	<dt>Shark</dt>
+	<dd>
+		<p>Shark is a cold and relentless hunter. His power is known to all who live near the sea. When Shark strikes, he does so without mercy, driven into a frenzy by the blood of his prey. Shark magicians tend to be wanderers, always on the move. They are fierce and deadly warriors. A Shark magician believes the only good enemy is a dead enemy. If challenged, he does not waste time with threats or boasts but strikes to kill.</p>
+		<p><strong>Advantages</strong>: +2 to Fear, +2 to Smite, +2 to summon Spirits of the Waters</p>
+		<p><strong>Disadvantages</strong>: Gains the Bloodthirsty hindrance</p>
+	</dd>
+	<dt>Snake</dt>
+	<dd>
+		<p>Snake is wise and knows many secrets. She is a good counselor, but always exacts a price for her advice. Snake characters fight only to protect themselves and others. They are obsessed with learning secrets and take great risks in order to do so. They trade their knowledge to others for whatever they can get in exchange.</p>
+		<p><strong>Advantages</strong>: +2 to Analyze Foe, +2 to Sleep</p>
+		<p><strong>Disadvantages</strong>: Gains the Cautious hindrance</p>
+	</dd>
+	<dt>Wolf</dt>
+	<dd>
+		<p>Wolf is recognized as a hunter and warrior worldwide. He is devoted to the other members of his pack. As the ancient saying goes, Wolf wins every fight but one, and in that one, he dies. Wolf magicians are loyal to friends and family unto death. They do not show cowardice in battle and their word is their bond.</p>
+		<p><strong>Advantages</strong>: +2 to Armor, +2 to Growth/Shrink, +2 to Spirits of the Land</p>
+		<p><strong>Disadvantages</strong>: Gains Code of Honor hindrance</p>
+	</dd>
+</dl>
+<h5>Shamanic Spells</h5>
+<p>Shaman can learn any spell from the spell list, begin play with Assensing, Elemental Manipulation, Summon Spirit, and 3 additional Novice rank spells of the player's choice. 
+<h4>Hermetic Mages</h4>
+<p>Hermetic magicians are the closest thing to magi- cal scientists the mystical world can offer. The mage focuses on reproducible results, laws, theorems, and relationships. To her, magic is not a matter of emotion as much as it is the art of going insane in a very specific way.</p>
+<h5>Hermetic Spells</h5>
+<p>Mages can learn any spell from the spell list, begin play with Assensing, Elemental Manipulation, Summon Elemental, and 3 additional Novice rank spells of the player's choice.
+<h4>Physical Adepts</h4>
+<p>Adepts are characters that use magic to improve their physical body. A physical adept never counts as an Unarmed Defender and the adept's unarmed attacks deal Strength + d4 damage. The range of any spell learned by an adept is effectively reduced to self, no matter what the description of the power states. However, using the Magic skill to activate physical adept powers is a free action. So unlike other magic users, a physical adept could cast Bless to raise her strength <i>and</i> attack in the same round without incurring a multi-action penalty. Adepts cannot summon spirits or elementals. Adepts begin play with 5 Novice level powers of the player's choice.</p>
+<h5>Physical Adept Spell List</h5>
+<ul>
+	<li>Analyze Foe</li>
+	<li>Armor</li>
+	<li>Assensing</li>
+	<li>Beast Friend</li>
+	<li>Bless (but not Curse)</li>
+	<li>Damage Field</li>
+	<li>Darksight</li>
+	<li>Deflection</li>
+	<li>Disguise</li>
+	<li>Draining Touch</li>
+	<li>Environmental Protection</li>
+	<li>Farsight</li>
+	<li>Fly</li>
+	<li>Greater Healing</li>
+	<li>Growth/Shrink</li>
+	<li>Havoc (Burst Template must be centered on caster, who is immune to the effects)</li>
+	<li>Healing</li>
+	<li>Intangibility</li>
+	<li>Invisibility</li>
+	<li>Pummel</li>
+	<li>Quickness</li>
+	<li>Shape Change</li>
+	<li>Smite</li>
+	<li>Speak Language</li>
+	<li>Speed</li>
+	<li>Succor</li>
+	<li>Teleport</li>
+	<li>Wall Walker</li>
+	<li>Warrior’s Gift</li>
+</ul>
+<h3>Conjuring</h3>
+<p>Conjuring is the art of calling, dismissing, and controlling independent astral forms called spirits.  Spirits are creatures native to the astral plane and metaplanes. They primarily exist as purely astral forms. Though such entities can sometimes materialize and become tangible in the physical world, they dislike doing so, and their true home remains in the astral realms. Spirits have an existence deep in astral space outside the realm of metahuman experience, and theories abound as to why they can be bound by metahuman magicians.</p>
+<h4>Nature Spirits</h4>
+<p>Nature spirits personify the forces of the environment. Only a shaman can summon or control a nature spirit. A shaman can summon a nature spirit only in its home environment.</p>
+<h4>Elemental Spirits</h4>
+<p>Elementals arise from the four hermetic elements: Fire, Water, Air, or Earth. Only a mage can summon or control an elemental. Each elemental requires a source, a sample of its element.</p>
+<h4>Spirit Services</h4>
+<p>Once summoned, nature spirits and elementals can perform physical or magical services for the summoning magician. A service is usually a simple command, something that can be expressed in a single sentence with a single target. "Kill him!" would probably work. "Destroy them all" in a room full of LoneStar, not so much. In addition to fighting for you spirits can use their own magical energies to maintain a single spell doubling its normal duration. Finally, spirits can directly assist you in casting a spell, granting a +2 to your casting roll.</p>
+<h3>Essence and Magic</h3>
+<p>A stronger essence allows for a stronger connection to the astral plane. In game terms this means that the penalty to the casting roll for any spell cannot exceed the essence of the casting character.</p>
+<h3>Spells</h3>
+<h4>Spell List</h4>
+<div class="spell">
+	<h5>Analyze Foe</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0 or -1</li>
+		<li><strong>Range</strong>: Line of sight</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Mystical sense, spiritual advice</li>
+	</ul>
+	<p>Knowledge is power. Being able to judge the strength of a foe before engaging him in combat can be highly advantageous. The character makes an arcane skill roll opposed by the target’s Spirit. At no penalty the caster gains a +1 bonus to Trait rolls to directly affect the target, and the target suffers a –1 penalty to Trait rolls to directly affect the caster. With a raise, the effect is increased to +2 and –2 for both. At a -1 penalty, in addition to the previous effect, each success and raise allows the caster to learn of a single Immunity, Invulnerability, or Weakness of the target (if one exists).</p>
+</div>
+<div class="spell">
+	<h5>Armor</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: A mystical glow, hardened skin, ethereal armor</li>
+	</ul>
+	<p>Armor creates a field of magical protection around a character or an actual shell of some sort. Success grants the recipient 2 points of Armor. A raise grants 4 points of Armor.</p>
+</div>
+<div class="spell">
+	<h5>Assensing</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: Sight</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Waving hands, whispered words</li>
+	</ul>
+	<p>Projecting consciousness into the astral plane allows a character to sense supernatural persons, objects, or effects within sight. This includes invisible foes, enchantments on people or items, and so on.</p>
+</div>
+<div class="spell">
+	<h5>Banish</h5>
+	<ul>
+		<li><strong>Rank</strong>: Veteran</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Holy items, arcane symbols, handful of salt</li>
+	</ul>
+	<p>This spell is an opposed roll of the caster’s arcane skill versus the target’s Spirit. On a success, the target is Shaken. On a raise, they are sent back to the astral plane.</p>
+</div>
+<div class="spell">
+	<h5>Barrier</h5>
+	<ul>
+		<li><strong>Rank</strong>: Seasoned</li>
+		<li><strong>Penalty</strong>: -1 through -4</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Ice, thorns, force, bones</li>
+	</ul>
+	<p>Barrier creates a solid, immobile wall to protect the user against attack or to entrap an opponent. Regardless of what the barrier is made of, it has a Toughness of 10. Each section covers a single square or hex on the map. Up to 2 sections can be created per point of penalty applied to the casting roll. All sections from a single casting must be connected.</p>
+</div>
+<div class="spell">
+	<h5>Beast Friend</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -10</li>
+		<li><strong>Range</strong>: Smarts x 100 Yards</li>
+		<li><strong>Duration</strong>: 100 rounds / 10 minutes</li>
+		<li><strong>Example Trappings</strong>: Gestures, animal call mimicry, meditation</li>
+	</ul>
+	<p>This spell allows mages to speak with and guide the actions of nature’s beasts. It works only on creatures with animal intelligence, not humanoids. The target must be within the sorcerer’s range—it is not conjured. The penalty applied to the roll determine the maximum size of the beast.</p>
+</div>
+<div class="spell">
+	<h5>Blast</h5>
+	<ul>
+		<li><strong>Rank</strong>: Seasoned</li>
+		<li><strong>Penalty</strong>: -1 through -3</li>
+		<li><strong>Range</strong>: 24/48/96</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Balls of fire, ice, light, darkness, swarm of insects</li>
+		<li><strong>Damage</strong>: 2d6 or 3d6</li>
+	</ul>
+	<p>Blast is an area effect power that can put down many opponents at once. The caster first picks where she wants to center the blast, then makes the appropriate skill roll. Normal ranged attack modifiers apply. The area of effect is a Medium Burst Template. If the roll is failed, the blast deviates. Roll a d12 and a d10. Read the number on the d12 like a clock face to determine direction. Multiply the d10 by 10% to calculate distance. Targets within the blast suffer 2d6 damage. Unlike other attacks, raises on the attack roll do not add to damage to area effect attacks. For a penalty of -2, the blast does 3d6 damage or the size is increased to a Large Burst Template. For a penalty of -3 it does both.</p>
+</div>
+<div class="spell">
+	<h5>Bless/Curse</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -3</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Physical changes, glowing or dark auras</li>
+	</ul>
+	<p>Bless allows a character to increase any of a target’s Traits by one die type for a standard success, or by two with a raise. The affected Trait can exceed d12. Each step over d12 adds +1 to his Trait total.</p>
+	<p>Curse is an opposed roll against the victim’s Spirit. Success lowers any Trait of the caster’s choice one step, a raise lowers it two steps. A Trait cannot be lowered below a d4.</p>
+	<p>Either version can affect up to 2 targets per penalty point applied to the casting roll. All targets must have the same Trait adjusted and in the same direction.</p>
+</div>
+<div class="spell">
+	<h5>Blind</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -3</li>
+		<li><strong>Range</strong>: 12/24/48</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Bright flash of light, sand in eyes, sticky shadows</li>
+	</ul>
+	<p>This power temporarily blinds a target or targets. Those affected must make an Agility roll at –2 to avert their gaze and avoid the effect (at –4 if the caster got a raise on the attack roll). On a failure, victims are Shaken and –2 to Parry until their next action. If the target rolls a 1 on his Agility die (regardless of the Wild Die), he’s Shaken and fully blind until he recovers from being Shaken. Blinded victims suffer a –6 penalty to all Trait rolls that require vision and have their Parry reduced to 2.</p>
+	<p>At a -1 penalty, the power affects a single target. For a -2 penalty, the power affects everyone in a Medium Burst Template. For a -3 penalty, it affects everyone in a Large Burst Template.</p>
+</div>
+<div class="spell">	
+	<h5>Bolt</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0 through -3</li>
+		<li><strong>Range</strong>: 12/24/48</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Fire, ice, light, darkness, insects</li>
+		<li><strong>Damage</strong>: 2d6 or 3d6</li>
+	</ul>
+	<p>Bolt is a standard attack power of magic users who want to put the hurt on a chummer from across the room. There are <i>lots</i> of different ways to cast this one out of the box. Players are encouraged to get creative with Trappings as usual. For a -0 penalty: a single standard bolt dealing 2d6 damage may be cast. For a -1 penalty: the damage of a single bolt may be increased to 3d6 or 2 standard damage bolts may be cast. For a -2 penalty: 3 standard 2d6 damage bolts or 2 stronger 3d6 damage bolts may be cast. For a -3 penalty: 3 stronger 3d6 damage bolts may be cast. Multiple bolts may be spread among multiple targets at no additional penalty.</p>
+</div>
+<div class="spell">
+	<h5>Burst</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Cone Template</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: A shower of flames, light, or other energy</li>
+	</ul>
+	<p>Burst produces a large fan of energy that bathes its targets in red-hot fire or other damaging energy. When cast, place the thin end of the Cone Template at the character ’s front. Targets within the template may make Agility rolls versus the caster’s arcane skill roll to avoid the blaze. Those who fail suffer 2d10 damage. This ignores all but sealed armor.</p>
+</div>
+<div class="spell">
+	<h5>Confusion</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -3</li>
+		<li><strong>Range</strong>: Smarts x 2</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Hypnotic lights, brief illusions, loud noises</li>
+	</ul>
+	<p>On a successful casting, a target must make a Smarts roll at –2 or be Shaken, and on a raise, the roll is made at –4. Up to 2 targets per point of penalty applied to the casting roll.</p>
+</div>
+<div class="spell">
+	<h5>Damage Field</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Darksight</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 1 hour</li>
+		<li><strong>Example Trappings</strong>: Glowing eyes, dilated pupils, sonic sight</li>
+	</ul>
+	<p>On a success, this spell halves any darkness penalty for the subject (round down). For example, a character in Dim (–1) lighting would suffer no penalty, and one in Pitch Darkness (–4) would only suffer a –2. On a raise, the spell negates all darkness penalties up to the maximum of –6.</p>
+</div>
+<div class="spell">
+	<h5>Deflection</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Mystical shield, gust of wind, phantom servant that intercepts the missiles</li>
+	</ul>
+	<p>With a standard success, attackers must subtract 2 from any Fighting, Shooting, or other attack rolls directed at the user. A raise increases the penalty to –4. This also acts as Armor against area effect weapons.</p>
+</div>
+<div class="spell">
+	<h5>Disguise</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Dispel</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Divination</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Draining Touch</h5>
+	<ul>
+		<li><strong>Rank</strong>: Seasoned</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Self</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Dehydration, poison, static shock</li>
+	</ul>
+	<p>This spell makes the touch of the caster deadly. After casting the spell, the mage delivers his draining touch on a successful touch attack (+2 Fighting). Victims must make a Vigor roll (at –2 if the mage scored a raise when casting) or suffer a level of Fatigue.</p>
+	<p>Normally, these Fatigue levels recover at one per 5 minutes, but if the target rolls a 1 on his Vigor die, regardless of the Wild Die, it takes one hour to recover.</p>
+</div>
+<div class="spell">
+	<h5>Elemental Manipulation</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: Smarts x 2</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: A few simple gestures</li>
+	</ul>
+	<p>A character who chooses this power can perform basic “tricks” using the four elements: air, earth, fire, and water. The GM is the final arbiter on what effects can be performed but some examples are: Create lesser air currents to blow out a candle, fan a flame, etc. Open a one-foot square hole in soft earth or cause a spray of sand that might blind an opponent. Create a small flame or urge an existing fire to spread. Conjure up to a pint of water or purify up to a gallon.</p>
+</div>
+<div class="spell">
+	<h5>Entangle</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -2</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: Special</li>
+		<li><strong>Example Trappings</strong>: Glue bomb, vines, handcuffs, spider webs</li>
+	</ul>
+	<p>The arcane skill roll is opposed by the target’s Agility. Success indicates partial restraint so that the target suffers a –2 penalty to Pace and skills linked to Agility and Strength. A raise restrains the target fully. He cannot move or use any skills linked to Agility or Strength.</p>
+	<p>Each following round, an entangled target may make a Strength or Agility roll to break free. Other characters may also attempt to free the ensnared person by making a Strength roll at –2.</p>
+	<p>At a -1 penalty to the casting roll entangle targets a single opponent. At a -2 penalty it affects everyone in a Medium Burst Template.</p>
+</div>
+<div class="spell">
+	<h5>Environmental Protection</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 1 hour</li>
+		<li><strong>Example Trappings</strong>: A mark on the forehead, potions, gills</li>
+	</ul>
+	<p>This power allows the target to breathe, speak, and move at his normal Pace while in one normally harmful environment, such as underwater, a zero-G vacuum, the lava of a volcano, or even the heat of the sun. Pressure, atmosphere, air, etc, are all provided for.</p>
+</div>
+<div class="spell">
+	<h5>Farsight</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Fear</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Smarts x 2</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Gestures, eldritch energy, cold chills</li>
+	</ul>
+	<p>This power causes the target overwhelming dread and horror. The area of effect is the Large Burst Template. Every creature beneath the template must make a Fear check, at –2 if the caster got a raise. Wild Cards who fail roll on the Fear Table. Extras are Panicked instead.</p>
+</div>
+<div class="spell">
+	<h5>Fly</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Greater Healing</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Growth/Shrink</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Havoc</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Healing</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Laying on hands, touching the victim with a holy symbol, prayer</li>
+	</ul>
+	<p>Each use of the healing spell removes a wound with a success, two with a raise. The roll suffers a penalty equal to the victim’s wounds (in addition to any the caster might be suffering himself). Healing can also cure poison and disease if used within 10 minutes of the event.</p>
+</div>
+<div class="spell">
+	<h5>Intangibility</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Invisibility</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Light/Obscure</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: 30 minutes for Light, 3 rounds for Osbscure</li>
+		<li><strong>Example Trappings</strong>: Illusionary torch, sunlight, darkness, thick fogs</li>
+	</ul>
+	<p>Light negates any darkness/obscurement penalty up to –6 in an area equal to a Large Burst Template for 30 minutes. The reverse of the power, obscure, creates a –6 obscurement penalty of the same size lasting for 3 rounds.</p>
+</div>
+<div class="spell">
+	<h5>Mind Reading</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Psionic invasion, soulsight</li>
+	</ul>
+	<p>This is an opposed roll versus the target’s Smarts. A success allows the character to gain one truthful answer from the subject. The target is aware of the mental intrusion unless the mind reader gets a raise.</p>
+</div>
+<div class="spell">
+	<h5>Preserve</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: 24</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p>This spell prevents dead organic matter from drying out, decaying, or putrefying. The magician must roll a single success to cast the spell. The preserve spell can be used on food, but is most often used by forensic magicians to protect cadavers from decay before autopsy, or to preserve small organic samples taken from a crime scene for later use.</p>
+</div>
+<div class="spell">
+	<h5>Pummel</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Puppet</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Quickness</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Shape Change</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -10</li>
+		<li><strong>Range</strong>: Self</li>
+		<li><strong>Duration</strong>: 10 minutes</li>
+		<li><strong>Example Trappings</strong>: Morphing, talismans, tattoos</li>
+	</ul>
+	<p>Similar to the Beast Friend power, the penalty of the roll determines the size of the animal.</p>
+</div>
+<div class="spell">
+	<h5>Sleep</h5>
+	<ul>
+		<li><strong>Rank</strong>: Seasoned</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: Smarts x 2</li>
+		<li><strong>Duration</strong>: 1 minute (10 rounds)</li>
+		<li><strong>Example Trappings</strong>: Sing lullaby, gestures, blow powder or sand at targets</li>
+	</ul>
+	<p>Blasting a hoard of enemies into tiny pieces may be popular with some mages, but those who favor stealth or have a pacifistic bent are drawn to this spell. The caster picks where he wants to center the spell and places a Medium Burst Template. He then makes an arcane skill roll. Any living creature (not undead or constructs) within the area must make a Spirit roll, at –2 if the caster scored a raise. Those who fail fall asleep. Loud noises awaken the sleepers as if they were a normal sleeper. When the duration expires, the sleepers naturally wake up.</p>
+</div>
+<div class="spell">
+	<h5>Slow</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Smite</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -3</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: A colored glow, runes, sigils, crackling energy, barbs grow from the blade</li>
+	</ul>
+	<p>This power is cast on a weapon of some sort. While the spell is in effect, the weapon’s damage is increased by +2 or +4 with a raise. Up to 2 weapons may be targeted per point of penalty applied to the casting roll.</p>
+</div>
+<div class="spell">
+	<h5>Speak Language</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 10 minutes</li>
+		<li><strong>Example Trappings</strong>: Words, pictures, hand motions</li>
+	</ul>
+	<p>This power allows a character to speak, read, and write a language other than his own. A raise on the arcane skill roll allows the user to project a particular dialect as well.</p>
+</div>
+<div class="spell">
+	<h5>Speed</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: Blurred motion, floating, acrobatics</li>
+	</ul>
+	<p>Speed allows the target of the power to move faster than usual. With a success, the recipient’s basic Pace is doubled. With a raise, running becomes a free action, so he may ignore the usual –2 running penalty.</p>
+</div>
+<div class="spell">
+	<h5>Sterilize</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1</li>
+		<li><strong>Range</strong>: 24</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: A flash of light, fumigating fog, scrubbing bubbles</li>
+	</ul>
+	<p>This spell kills small life forms such as bacteria and other microorganisms under a Large Burst Template. In addition, it also destroys or renders unusable such biomaterial as skin flakes, stray hairs, spilled blood, and so forth that might be left behind at a crime scene.</p>
+</div>
+<div class="spell">
+	<h5>Stun</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: 12/24/48</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Bolts of energy, stun bombs, sonic booms, burst of blinding light</li>
+	</ul>
+	<p>With a success, targets within a Medium Burst Template must make Vigor rolls or be Shaken. With a raise, victims must make Vigor rolls at –2.</p>
+</div>
+<div class="spell">
+	<h5>Succor</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: 0</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: Instant</li>
+		<li><strong>Example Trappings</strong>: Prayer, laying on hands, curative tonic</li>
+	</ul>
+	<p>Succor removes one Fatigue level, two with a raise. It can also remove a character’s Shaken status.</p>
+</div>
+<div class="spell">
+	<h5>Summon Spirit/Elemental</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -2</li>
+		<li><strong>Range</strong>: Smarts</li>
+		<li><strong>Duration</strong>: Special</li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p>A Magician must have some of that element handy to do the summoning. The element or natural surrounding must be present for the Shaman to summon a Spirit. The spirit / elemental will be bound to you until two jobs given are accomplished or Sunset/ Sunrise (which ever comes first). With a raise three jobs can be given. The creature must remain within 200 ft of you or it goes back to its native plane.</p>
+</div>
+<div class="spell">
+	<h5>Telekinesis</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Teleport</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<div class="spell">
+	<h5>Wall Walker</h5>
+	<ul>
+		<li><strong>Rank</strong>: Novice</li>
+		<li><strong>Penalty</strong>: -1 through -3</li>
+		<li><strong>Range</strong>: Touch</li>
+		<li><strong>Duration</strong>: 3 rounds</li>
+		<li><strong>Example Trappings</strong>: A crushed spider, bit of web, piece of tentacle</li>
+	</ul>
+	<p>Wall walker allows the recipient to function much like a human spider. He can stick to any surface, allowing him to climb walls and even hang from the ceiling. With a success, the character can move along such surfaces at half his normal Pace. With a raise, he may move at full Pace and even run. Up to 2 targets per penalty point applied to the casting roll.</p>
+</div>
+<div class="spell">
+	<h5>Warrior’s Gift</h5>
+	<ul>
+		<li><strong>Rank</strong>: </li>
+		<li><strong>Penalty</strong>: </li>
+		<li><strong>Range</strong>: </li>
+		<li><strong>Duration</strong>: </li>
+		<li><strong>Example Trappings</strong>: </li>
+	</ul>
+	<p></p>
+</div>
+<footer>
+	<p><small>© 2013 The Topps Company, Inc. All Rights Reserved. Shadowrun and Matrix are registered trademarks and/or trademarks of The Topps Company, Inc., in the United States and/or other countries. Catalyst Game Labs and the Catalyst Game Labs logo are trademarks of InMediaRes Productions, LLC.</small></p>
+	<p><small>Images sourced from <a href="http://old.shadowrun4.com/">old.shadowrun4.com</a>, <a href="http://www.shadowruntabletop.com/">www.shadowruntabletop.com</a>, and various artists on <a href="http://www.deviantart.com/">DeviantArt</a>. DeviantArt images have both the name of the work and the artist in the file names.</small></p>
+</footer>	
+</body>
+</html>

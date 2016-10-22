@@ -1,0 +1,40 @@
+html, body {
+	height: 100%;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+body {
+	color: green;
+	background-color: black;
+	font-family: November, Consolas, Monaco, monospace;
+}
+@font-face {
+	/* November font via http://www.1001fonts.com/november-font.html */
+	font-family: November;
+	/* 
+	IE9+ likes eot format
+	woff is an open standard most modern browsers understand
+	truetype is a bit more mobile friendly
+	svg is largely for legacy iOS
+	by providing a list the browser gets to pick the format it prefers
+	and if none of this works we provide a list of fallbacks after November
+	*/
+	src: url('novem___.eot'), 
+	     url('novem___.woff') format('woff'), 
+	     url('novem___.ttf')  format('truetype'), 
+	     url('novem___.svg#November') format('svg'); 
+}
+#screen {
+	margin: 0;
+	padding: 1em;
+}
+h1 {
+	margin-top: 0;
+	padding-top: 0;
+}
+input {
+	border: none;
+	background: transparent;
+	color: green;
+}
